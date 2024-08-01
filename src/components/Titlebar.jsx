@@ -16,10 +16,10 @@ function Titlebar() {
           navigate('/tenant-dashboard');
           break;
         case 'finance-manager':
-          navigate('/finance-dashboard');
+          navigate('/finance-manager-dashboard');
           break;
         case 'procurement-manager':
-          navigate('/procurement-dashboard');
+          navigate('/procurement-manager-dashboard');
           break;
         default:
           navigate('/');
