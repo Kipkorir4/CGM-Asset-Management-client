@@ -39,8 +39,9 @@ function Login() {
     });
   };
 
-  // Capitalize the first letter of each word in the role
+  // Capitalize the first letter of each word, special case for CEO
   const formatRoleTitle = (role) => {
+    if (role.toLowerCase() === 'ceo') return 'CEO';
     return role.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
