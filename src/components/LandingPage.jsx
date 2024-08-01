@@ -1,17 +1,25 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/LandingPage.css';
 
 function LandingPage() {
     const navigate = useNavigate();
 
     return (
-        <div>
-            <h1>CGM Properties</h1>
+        <div className="landing-page">
             <div className="title-cards">
-                <button onClick={() => navigate('/login/ceo')}>I am the CEO</button>
-                <button onClick={() => navigate('/login/finance-manager')}>I am the Finance Manager</button>
-                <button onClick={() => navigate('/login/procurement-manager')}>I am the Procurement Manager</button>
-                <button onClick={() => navigate('/login/tenant')}>I am a Tenant</button>
+                <div className="card" onClick={() => navigate('/login/ceo')}>
+                    <h2>I am the CEO</h2>
+                </div>
+                <div className="card" onClick={() => navigate('/login/finance-manager')}>
+                    <h2>I am the Finance Manager</h2>
+                </div>
+                <div className="card" onClick={() => navigate('/login/procurement-manager')}>
+                    <h2>I am the Procurement Manager</h2>
+                </div>
+                <div className="card" onClick={() => navigate('/login/tenant')}>
+                    <h2>I am a Tenant</h2>
+                </div>
             </div>
         </div>
     );

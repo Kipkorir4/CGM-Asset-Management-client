@@ -1,26 +1,32 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
-import Dashboard from './components/Dashboard';
+import CEODashboard from './dashboards/CEODashboard';
+import TenantDashboard from './dashboards/TenantDashboard';
+import FinanceDashboard from './dashboards/FinanceDashboard';
+import ProcurementDashboard from './dashboards/ProcurementDashboard';
+import LandingPage from './components/LandingPage';
 import Titlebar from './components/Titlebar';
 import Footer from './components/Footer';
-
+import './styles/App.css';
 
 function App() {
   return (
     <Router>
-      {/* <Titlebar /> */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/ceo-login" element={<Login role="CEO" />} />
-        <Route path="/finance-manager-login" element={<Login role="Finance Manager" />} />
-        <Route path="/procurement-manager-login" element={<Login role="Procurement Manager" />} />
-        <Route path="/tenant-login" element={<Login role="Tenant" />} />
-        {/* Define routes for dashboards with role parameter */}
-        <Route path="/:role-dashboard" element={<Dashboard />} />
-      </Routes>
-      <Footer />
+      <div className="app">
+        <Titlebar />
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login/:role" element={<Login />} />
+            <Route path="/ceo-dashboard" element={<CEODashboard />} />
+            <Route path="/tenant-dashboard" element={<TenantDashboard />} />
+            <Route path="/finance-manager-dashboard" element={<FinanceDashboard />} />
+            <Route path="/procurement-manager-dashboard" element={<ProcurementDashboard />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </Router>
   );
 }
