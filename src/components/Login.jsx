@@ -19,6 +19,7 @@ function Login() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username, password, role }),
+      credentials: 'include', 
     })
     .then(response => response.json().then(data => ({ status: response.status, data })))  // Handle status code
     .then(({ status, data }) => {

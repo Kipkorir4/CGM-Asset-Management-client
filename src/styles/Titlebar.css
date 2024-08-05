@@ -1,34 +1,36 @@
 .titlebar {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  .titlebar-link {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .titlebar-link:hover {
-    text-decoration: none;
-  }
-  
-  /* Add a margin-top to the main content to avoid overlap with the fixed header */
-  .main-content {
-    margin-top: 60px; /* Adjust this value based on the height of your titlebar */
-  }
-  
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  box-shadow: 0px 4px 2px -2px gray;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-/* #title{
-    text-align: center;
-    background-color: #333;
-    color: white;
+.titlebar.centered {
+  justify-content: center;
+}
+
+.titlebar.dashboard {
+  justify-content: space-between;
+}
+
+.titlebar h1#title {
+  margin: 0;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .titlebar {
     padding: 10px;
-    z-index: 1000
-    
-} */
+  }
+
+  .titlebar h1#title {
+    font-size: 1.5rem;
+  }
+}

@@ -4,7 +4,7 @@ import '../styles/Footer.css';
 function Footer(){
   return (
     <footer className="footer">
-      <p>Our Socials: </p>
+      <h3>Our Socials: Kuja kwa ofisi na uwache maneno mingi.</h3>
     </footer>
   );
 };

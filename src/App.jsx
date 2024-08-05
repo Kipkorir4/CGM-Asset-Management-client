@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
-import CEODashboard from './dashboards/CEODashboard';
-import TenantDashboard from './dashboards/TenantDashboard';
+import CEODashboardRoutes from './dashboards/CEODashboard'; // Updated import
+import TenantDashboardRoutes from './dashboards/TenantDashboard'; // Updated import
 import FinanceDashboard from './dashboards/FinanceDashboard';
 import ProcurementDashboard from './dashboards/ProcurementDashboard';
 import LandingPage from './components/LandingPage';
@@ -19,10 +19,10 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login/:role" element={<Login />} />
-            <Route path="/ceo-dashboard" element={<CEODashboard />} />
-            <Route path="/tenant-dashboard" element={<TenantDashboard />} />
-            <Route path="/finance-manager-dashboard" element={<FinanceDashboard />} />
-            <Route path="/procurement-manager-dashboard" element={<ProcurementDashboard />} />
+            <Route path="/ceo-dashboard/*" element={<CEODashboardRoutes />} /> {/* Updated route */}
+            <Route path="/tenant-dashboard/*" element={<TenantDashboardRoutes />} /> {/* Updated route */}
+            <Route path="/finance-manager-dashboard/*" element={<FinanceDashboard />} />
+            <Route path="/procurement-manager-dashboard/*" element={<ProcurementDashboard />} />
           </Routes>
         </div>
         <Footer />
