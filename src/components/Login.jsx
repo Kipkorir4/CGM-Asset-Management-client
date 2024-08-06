@@ -26,6 +26,10 @@ function Login() {
       if (status === 200) {
         // Save user role in sessionStorage
         sessionStorage.setItem('userRole', role);
+        console.log('User role', data.user.user_id);
+        sessionStorage.setItem('user_id', data.user.user_id);
+
+        // sessionStorage.setItem('user_id', user.ide);
 
         // Navigate to the appropriate dashboard based on the role
         const rolePath = role.toLowerCase().replace(' ', '-');
