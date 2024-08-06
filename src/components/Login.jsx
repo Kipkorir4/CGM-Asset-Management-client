@@ -26,7 +26,8 @@ function Login() {
       if (status === 200) {
         // Save user role in sessionStorage
         sessionStorage.setItem('userRole', role);
-        console.log('User role', data.user.user_id);
+        console.log('User Role', data.user.role);
+        console.log('User ID', data.user.user_id);
         sessionStorage.setItem('user_id', data.user.user_id);
 
         // sessionStorage.setItem('user_id', user.ide);
