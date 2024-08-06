@@ -20,7 +20,9 @@ function TenantDashboard() {
 // PreviousComplaints Component
 function PreviousComplaints() {
   const [complaints, setComplaints] = useState([]);
-  const userId = sessionStorage.getItem('userId');
+  const userId = sessionStorage.getItem('user_id');
+
+  console.log("userId: ", userId)
 
   useEffect(() => {
     fetch(`https://cgm-asset-management-server.onrender.com/complaints/${userId}`, {
@@ -31,6 +33,8 @@ function PreviousComplaints() {
       .then(data => setComplaints(data))
       .catch(error => console.error('Error fetching complaints:', error));
   }, [userId]);
+
+  console.log("complaints", complaints)
 
   return (
     <div className="container">
