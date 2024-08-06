@@ -23,7 +23,7 @@ function PreviousComplaints() {
   const userId = sessionStorage.getItem('userId');
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/complaints/${userId}`, {
+    fetch(`https://cgm-asset-management-server.onrender.com/complaints/${userId}`, {
       method: 'GET',
       credentials: 'include', // Include credentials in the request
     })
@@ -60,7 +60,7 @@ function FileComplaint() {
     const userId = sessionStorage.getItem('user_id');
 
     console.log('Sending', userId)
-    fetch('http://127.0.0.1:5000/complaints', {
+    fetch('https://cgm-asset-management-server.onrender.com/complaints', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
