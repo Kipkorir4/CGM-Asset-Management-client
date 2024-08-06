@@ -57,7 +57,9 @@ function FileComplaint() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userId = sessionStorage.getItem('userId');
+    const userId = sessionStorage.getItem('user_id');
+
+    console.log('Sending', userId)
     fetch('http://127.0.0.1:5000/complaints', {
       method: 'POST',
       headers: {
