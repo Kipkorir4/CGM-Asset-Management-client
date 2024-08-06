@@ -10,6 +10,8 @@ function Login() {
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_API_URL
 
+  console.log("Base URL", baseURL)
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
