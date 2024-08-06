@@ -8,12 +8,14 @@ function Login() {
   const [error, setError] = useState('');
   const { role } = useParams();  // Extract role from URL
   const navigate = useNavigate();
+  const baseURL = import.meta.env.VITE_API_URL
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');  // Reset error message
 
-    fetch('https://cgm-asset-management-server.onrender.com/login', {
+    fetch(`${baseURL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

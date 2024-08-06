@@ -21,11 +21,12 @@ function TenantDashboard() {
 function PreviousComplaints() {
   const [complaints, setComplaints] = useState([]);
   const userId = sessionStorage.getItem('user_id');
+  const baseURL = import.meta.env.VITE_API_URL
 
   console.log("userId: ", userId)
 
   useEffect(() => {
-    fetch(`https://cgm-asset-management-server.onrender.com/complaints/${userId}`, {
+    fetch(`${baseURL}/complaints/${userId}`, {
       method: 'GET',
       credentials: 'include', // Include credentials in the request
     })
@@ -58,19 +59,20 @@ function FileComplaint() {
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [message, setMessage] = useState('');
+  const baseURL = import.meta.env.VITE_API_URL
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = sessionStorage.getItem('user_id');
 
     console.log('Sending', userId)
-    fetch('https://cgm-asset-management-server.onrender.com/complaints', {
+    fetch(`${baseURL}/complaints`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ userId, category, description }),
-      credentials: 'include', // Include credentials in the request
+      credentials: 'include',
     })
       .then(response => response.json())
       .then(data => {
