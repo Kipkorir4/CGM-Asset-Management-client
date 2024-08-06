@@ -11,7 +11,9 @@ function ProcurementDashboard() {
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/complaints');
+      const response = await fetch('http://127.0.0.1:5000/complaints', {
+        credentials: 'include',
+      });
       const data = await response.json();
       setComplaints(data);
     } catch (error) {
@@ -26,7 +28,13 @@ function ProcurementDashboard() {
         credentials: 'include',
       });
       if (response.ok) {
-        fetchComplaints(); // Refresh complaints list
+        setComplaints((prevComplaints) =>
+          prevComplaints.map((complaint) =>
+            complaint.id === complaintId
+              ? { ...complaint, status: action === 'accept' ? 'Accepted' : 'Declined' }
+              : complaint
+          )
+        );
       } else {
         console.error('Error handling complaint action:', await response.json());
       }
@@ -37,7 +45,6 @@ function ProcurementDashboard() {
 
   return (
     <div className="dashboard-container">
-      <LogoutButton />
       <h2>Procurement Manager Dashboard</h2>
       <div className="complaints-container">
         <table className="complaints-table">
@@ -47,8 +54,8 @@ function ProcurementDashboard() {
               <th>Complaint Number</th>
               <th>Category</th>
               <th>Description</th>
-              <th>Date</th>
-              <th>Actions</th>
+              <th>Date Filed</th>
+              <th>Actions/Status</th>
             </tr>
           </thead>
           <tbody>
@@ -65,12 +72,20 @@ function ProcurementDashboard() {
                   <td>{complaint.description}</td>
                   <td>{complaint.date}</td>
                   <td>
-                    <button onClick={() => handleAction(complaint.id, 'accept')} className="accept-button">
-                      Accept
-                    </button>
-                    <button onClick={() => handleAction(complaint.id, 'decline')} className="decline-button">
-                      Decline
-                    </button>
+                    {complaint.status === 'Accepted' ? (
+                      <button className="accepted-button" disabled>Accepted</button>
+                    ) : complaint.status === 'Declined' ? (
+                      <button className="declined-button" disabled>Declined</button>
+                    ) : (
+                      <>
+                        <button onClick={() => handleAction(complaint.id, 'accept')} className="accept-button">
+                          Accept
+                        </button>
+                        <button onClick={() => handleAction(complaint.id, 'decline')} className="decline-button">
+                          Decline
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))
