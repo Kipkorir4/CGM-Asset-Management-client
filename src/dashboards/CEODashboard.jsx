@@ -27,7 +27,7 @@ function ViewCGMAffiliates() {
   useEffect(() => {
     const fetchData = async (type, setter) => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/users/${type}`);
+        const response = await fetch(`https://cgm-asset-management-server.onrender.com/users/${type}`);
         const data = await response.json();
         setter(data);
       } catch (error) {
@@ -76,7 +76,7 @@ function ViewComplaints() {
   const [complaints, setComplaints] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/all-complaints')
+    fetch('https://cgm-asset-management-server.onrender.com/all-complaints')
       .then((response) => response.json())
       .then((data) => setComplaints(data))
       .catch((error) => console.error('Error fetching complaints:', error));
@@ -105,7 +105,7 @@ function EnrollmentPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:5000/enroll', {
+    fetch('https://cgm-asset-management-server.onrender.com/enroll', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -6,7 +6,7 @@ function FinanceDashboard() {
   const [allocationAmount, setAllocationAmount] = useState('');
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/accepted-complaints', {
+    fetch('https://cgm-asset-management-server.onrender.com/accepted-complaints', {
       method: 'GET',
       credentials: 'include', // Include credentials in the request
     })
@@ -16,7 +16,7 @@ function FinanceDashboard() {
   }, []);
 
   const handleAllocate = (complaintId) => {
-    fetch(`http://127.0.0.1:5000/allocate-budget/${complaintId}`, {
+    fetch(`https://cgm-asset-management-server.onrender.com/allocate-budget/${complaintId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function FinanceDashboard() {
   };
 
   const handleDecline = (complaintId) => {
-    fetch(`http://127.0.0.1:5000/decline-complaint/${complaintId}`, {
+    fetch(`https://cgm-asset-management-server.onrender.com/decline-complaint/${complaintId}`, {
       method: 'POST',
       credentials: 'include', // Include credentials in the request
     })

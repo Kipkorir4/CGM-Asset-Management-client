@@ -11,7 +11,7 @@ function ProcurementDashboard() {
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/complaints', {
+      const response = await fetch('https://cgm-asset-management-server.onrender.com/complaints', {
         credentials: 'include',
       });
       const data = await response.json();
@@ -23,7 +23,7 @@ function ProcurementDashboard() {
 
   const handleAction = async (complaintId, action) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/complaints/${complaintId}/${action}`, {
+      const response = await fetch(`https://cgm-asset-management-server.onrender.com/complaints/${complaintId}/${action}`, {
         method: 'POST',
         credentials: 'include',
       });
