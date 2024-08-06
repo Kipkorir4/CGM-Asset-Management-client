@@ -1,0 +1,194 @@
+/* TenantDashboard.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .dashboard-title, .complaints-title, .file-complaint-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .action-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .action-button:hover {
+    background-color: #45a049;
+  }
+  
+  .complaints-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .complaint-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .complaint-description, .complaint-category, .complaint-date {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .complaint-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  textarea.form-control {
+    height: 100px;
+  }
+  
+  .submit-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .dashboard-title, .complaints-title, .file-complaint-title {
+      font-size: 1.5em;
+    }
+  
+    .action-button {
+      padding: 8px 16px;
+      font-size: 0.9em;
+    }
+  
+    .complaint-form {
+      width: 90%;
+    }
+  }
+  
+
+
+
+
+  /* can uncomment */
+  /* .container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 800px;
+  }
+  
+  .dashboard-title,
+  .complaints-title,
+  .file-complaint-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .action-button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .complaints-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .complaints-table th,
+  .complaints-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .complaints-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  
+  .complaint-item {
+    background-color: #f9f9f9;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .message {
+    text-align: center;
+    margin-top: 10px;
+    color: green;
+  } */
