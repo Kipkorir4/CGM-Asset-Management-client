@@ -18,3 +18,82 @@
 .logout-button:focus {
     outline: none;
 }
+
+/* Media Queries */
+
+/* Small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+    .logout-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        
+           
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and down) */
+@media (max-width: 768px) {
+    .logout-button {
+        padding: 9px 18px;
+        font-size: 15px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and down) */
+@media (max-width: 992px) {
+    .logout-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and down) */
+@media (max-width: 1200px) {
+    .logout-button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+}
+
+
+
+/* IconButton.css */
+.logout-icon-button {
+    background-color: #ff4b5c;
+    border: none;
+    font-size: larger;
+    padding: 5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+        position: fixed;
+            right: 3vh;
+            top: 3vh;
+        padding: 1vh;    
+            /* width: 15vh; */
+    /* Optional: to make the button corners rounded */
+}
+.logout-icon-button:hover{
+    background-color: #ff4b5c;
+}
+
+
+.logout-icon-button svg {
+    width: 24px;
+    height: 24px;
+    /* fill: currentColor; */
+    color: #ff2e3c;
+}
+
+.logout-icon-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.logout-icon-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    /* Focus ring */
+}
