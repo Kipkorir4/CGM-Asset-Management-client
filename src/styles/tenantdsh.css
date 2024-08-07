@@ -151,7 +151,7 @@
   width: 40%;
   margin: auto;
   border-radius: 5px;
-  background-color: blur 5px transparent;
+  backdrop-filter: blur(50px);
 }
 
 .dashboard-title,

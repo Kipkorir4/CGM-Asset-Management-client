@@ -85,7 +85,7 @@
     width: 24px;
     height: 24px;
     /* fill: currentColor; */
-    color: #ff2e3c;
+    color: #ffffff;
 }
 
 .logout-icon-button:hover {
@@ -97,3 +97,4 @@
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
     /* Focus ring */
 }
+

@@ -90,6 +90,7 @@
   .titlebar {
     width: 80%;
     font-size: 16px;
+    height: 10vh;
   }
 
   .btn {
@@ -101,7 +102,7 @@
   .titlebar {
     width: 85%;
     font-size: 14px;
-    height: 8vh;
+    height: 10vh;
   }
 
   .btn {
@@ -118,7 +119,7 @@
   .titlebar {
     width: 90%;
     font-size: 12px;
-    height: 7vh;
+    height: 10vh;
   }
 
   .btn {

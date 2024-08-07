@@ -37,7 +37,7 @@ function ProcurementDashboard() {
 
   return (
     <div className="dashboard-container">
-      <LogoutButton />
+      {/* <LogoutButton /> */}
       <h2>Procurement Manager Dashboard</h2>
       <div className="complaints-container">
         <table className="complaints-table">
