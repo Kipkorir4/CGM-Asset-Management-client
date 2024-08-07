@@ -23,50 +23,139 @@ function ViewCGMAffiliates() {
   const [tenants, setTenants] = useState([]);
   const [procurementManagers, setProcurementManagers] = useState([]);
   const [financeManagers, setFinanceManagers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState({ tenants: 1, procurementManagers: 1, financeManagers: 1 });
 
   useEffect(() => {
-    const fetchData = async (type, setter) => {
+    const fetchData = async (type, setter, page) => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/users/${type}`);
-        const data = await response.json();
+        const response = await fetch(`http://127.0.0.1:5000/users/${type}?page=${page}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Error fetching data: ${response.status} ${response.statusText} - ${errorText}`);
+        }
+
+        const { data, totalPages } = await response.json();
         setter(data);
+        setTotalPages(prev => ({ ...prev, [type]: totalPages }));
       } catch (error) {
-        console.error('Error fetching data:', error);
+        setError(error.message);
+        console.error('Request failed:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchData('tenant', setTenants);
-    fetchData('procurement-manager', setProcurementManagers);
-    fetchData('finance-manager', setFinanceManagers);
-  }, []);
+    fetchData('tenant', setTenants, currentPage);
+    fetchData('procurement-manager', setProcurementManagers, currentPage);
+    fetchData('finance-manager', setFinanceManagers, currentPage);
+  }, [currentPage]);
+
+  const handlePageChange = (type, page) => {
+    setCurrentPage(page);
+    fetchData(type, setTenants, page); // Adjust this line to fetch data for the correct type
+  };
+
+  if (loading) {
+    return <div className="loading">Loading...</div>
+  }
+
+  if (error) {
+    return <div className="error">Error: {error}</div>
+  }
 
   return (
     <div className="container">
       <h1 className="title">View CGM Affiliates</h1>
-      <h2>Tenants</h2>
-      <ul className="list">
-        {tenants.map((tenant) => (
-          <li key={tenant.id} className="list-item">
-            {tenant.username} - {tenant.role}
-          </li>
-        ))}
-      </ul>
-      <h2>Procurement Managers</h2>
-      <ul className="list">
-        {procurementManagers.map((pm) => (
-          <li key={pm.id} className="list-item">
-            {pm.username} - {pm.role}
-          </li>
-        ))}
-      </ul>
-      <h2>Finance Managers</h2>
-      <ul className="list">
-        {financeManagers.map((fm) => (
-          <li key={fm.id} className="list-item">
-            {fm.username} - {fm.role}
-          </li>
-        ))}
-      </ul>
+      <section>
+        <h2>Tenants</h2>
+        {tenants.length > 0 ? (
+          <>
+            <ul className="list">
+              {tenants.map((tenant) => (
+                <li key={tenant.id} className="list-item">
+                  {tenant.username} - {tenant.role}
+                </li>
+              ))}
+            </ul>
+            <Pagination 
+              currentPage={currentPage} 
+              totalPages={totalPages.tenants} 
+              onPageChange={(page) => handlePageChange('tenant', page)} 
+            />
+          </>
+        ) : (
+          <p className="no-data">No tenants available</p>
+        )}
+      </section>
+      <section>
+        <h2>Procurement Managers</h2>
+        {procurementManagers.length > 0 ? (
+          <>
+            <ul className="list">
+              {procurementManagers.map((pm) => (
+                <li key={pm.id} className="list-item">
+                  {pm.username} - {pm.role}
+                </li>
+              ))}
+            </ul>
+            <Pagination 
+              currentPage={currentPage} 
+              totalPages={totalPages.procurementManagers} 
+              onPageChange={(page) => handlePageChange('procurement-manager', page)} 
+            />
+          </>
+        ) : (
+          <p className="no-data">No procurement managers available</p>
+        )}
+      </section>
+      <section>
+        <h2>Finance Managers</h2>
+        {financeManagers.length > 0 ? (
+          <>
+            <ul className="list">
+              {financeManagers.map((fm) => (
+                <li key={fm.id} className="list-item">
+                  {fm.username} - {fm.role}
+                </li>
+              ))}
+            </ul>
+            <Pagination 
+              currentPage={currentPage} 
+              totalPages={totalPages.financeManagers} 
+              onPageChange={(page) => handlePageChange('finance-manager', page)} 
+            />
+          </>
+        ) : (
+          <p className="no-data">No finance managers available</p>
+        )}
+      </section>
+    </div>
+  );
+}
+
+// Pagination Component
+function Pagination({ currentPage, totalPages, onPageChange }) {
+  return (
+    <div className="pagination">
+      {Array.from({ length: totalPages }, (_, index) => (
+        <button
+          key={index + 1}
+          onClick={() => onPageChange(index + 1)}
+          disabled={index + 1 === currentPage}
+        >
+          {index + 1}
+        </button>
+      ))}
     </div>
   );
 }
@@ -74,13 +163,52 @@ function ViewCGMAffiliates() {
 // ViewComplaints Component
 function ViewComplaints() {
   const [complaints, setComplaints] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/all-complaints')
-      .then((response) => response.json())
-      .then((data) => setComplaints(data))
-      .catch((error) => console.error('Error fetching complaints:', error));
+    const fetchComplaints = async () => {
+      try {
+        const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
+
+        if (!token) {
+          throw new Error('No auth token found');
+        }
+
+        const response = await fetch('http://127.0.0.1:5000/all-complaints', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Error fetching data: ${response.status} ${response.statusText} - ${errorText}`);
+        }
+
+        const data = await response.json();
+        setComplaints(data);
+      } catch (error) {
+        setError(error.message);
+        console.error('Error fetching complaints:', error);
+        setComplaints([]); // Set complaints to an empty array on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchComplaints();
   }, []);
+
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error">Error: {error}</div>;
+  }
 
   return (
     <div className="container">
@@ -95,6 +223,7 @@ function ViewComplaints() {
     </div>
   );
 }
+
 
 // EnrollmentPage Component
 function EnrollmentPage() {
