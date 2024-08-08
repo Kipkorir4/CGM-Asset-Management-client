@@ -1,10 +1,103 @@
+/* Footer.css */
+
 .footer {
     background-color: #333;
-    color: white;
-    padding: 10px;
+    color: #fff;
     text-align: center;
-    /* position: fixed; */
+    padding: 20px;
+    position: relative;
+    bottom: 0;
     width: 100%;
-    /* bottom: 0; */
-    z-index: 1000;
+}
+
+.socials-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    /* Space between heading and icons */
+}
+
+.socials-title {
+    font-size: 1.5em;
+    margin-right: 20px;
+    /* Space between title and icons */
+    color: #fff;
+}
+
+.footer .wrapper {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    /* Spacing between icons */
+}
+
+.footer .icon {
+    position: relative;
+    display: inline-block;
+}
+
+.footer .icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+    transition: fill 0.3s ease;
+}
+
+.wrapper .facebook:hover,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip::before {
+    background: #0066ff;
+    color: #fff;
+}
+
+.wrapper .twitter:hover,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip::before {
+    background: #1da1f2;
+    color: #fff;
+}
+
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+    background: #d62976;
+    color: #fff;
+}
+
+
+.footer .tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.footer .icon:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.copyright a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.copyright a:hover {
+    text-decoration: underline;
 }

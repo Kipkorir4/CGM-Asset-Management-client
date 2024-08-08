@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     font-family: Arial, sans-serif;
     display: flex;
@@ -14,16 +14,7 @@ body {
     flex: 1;
 }
 
-/* .titlebar {
-    width: 100%;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding-top: 0px;
-    position: fixed;
-    top: 10;
-    
-} */
+
 
 .title-cards {
     display: grid;
@@ -45,11 +36,4 @@ body {
 .card:hover {
     background-color: #e0e0e0;
 }
-
-/* .footer {
-    width: 100%;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-} */
+ */

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import LogoutButton from './LogoutButton';
 import '../styles/ProcurementDashboard.css';
 
 function ProcurementDashboard() {
   const [complaints, setComplaints] = useState([]);
+  const [filteredComplaints, setFilteredComplaints] = useState([]);
+  const [filter, setFilter] = useState('');
+  const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetchComplaints();
@@ -11,11 +13,12 @@ function ProcurementDashboard() {
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch('https://cgm-asset-management-server.onrender.com/complaints', {
+      const response = await fetch(`${baseURL}/fetch_all_complaints`, {
         credentials: 'include',
       });
       const data = await response.json();
       setComplaints(data);
+      setFilteredComplaints(data);
     } catch (error) {
       console.error('Error fetching complaints:', error);
     }
@@ -23,12 +26,19 @@ function ProcurementDashboard() {
 
   const handleAction = async (complaintId, action) => {
     try {
-      const response = await fetch(`https://cgm-asset-management-server.onrender.com/complaints/${complaintId}/${action}`, {
+      const response = await fetch(`${baseURL}/complaints/${complaintId}/${action}`, {
         method: 'POST',
         credentials: 'include',
       });
       if (response.ok) {
         setComplaints((prevComplaints) =>
+          prevComplaints.map((complaint) =>
+            complaint.id === complaintId
+              ? { ...complaint, status: action === 'accept' ? 'Accepted' : 'Declined' }
+              : complaint
+          )
+        );
+        setFilteredComplaints((prevComplaints) =>
           prevComplaints.map((complaint) =>
             complaint.id === complaintId
               ? { ...complaint, status: action === 'accept' ? 'Accepted' : 'Declined' }
@@ -43,9 +53,41 @@ function ProcurementDashboard() {
     }
   };
 
+  const handleFilterChange = (status) => {
+    const filtered = complaints.filter((complaint) =>
+      status ? complaint.status === status : true
+    );
+    setFilteredComplaints(filtered);
+  };
+
+  const handleSearchChange = (event) => {
+    const value = event.target.value.toLowerCase();
+    setFilter(value);
+    const filtered = complaints.filter((complaint) =>
+      complaint.category.toLowerCase().includes(value)
+    );
+    setFilteredComplaints(filtered);
+  };
+
   return (
     <div className="dashboard-container">
       <h2>Procurement Manager Dashboard</h2>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search complaints by category..."
+          value={filter}
+          onChange={handleSearchChange}
+          className="search-bar"
+        />
+      </div>
+
+      <div className="filter-buttons">
+        <h4>Sort complaints:</h4>
+        <button onClick={() => handleFilterChange('')}>All</button>
+        <button onClick={() => handleFilterChange('Accepted')}>Accepted</button>
+        <button onClick={() => handleFilterChange('Declined')}>Declined</button>
+      </div>
       <div className="complaints-container">
         <table className="complaints-table">
           <thead>
@@ -59,12 +101,12 @@ function ProcurementDashboard() {
             </tr>
           </thead>
           <tbody>
-            {complaints.length === 0 ? (
+            {filteredComplaints.length === 0 ? (
               <tr>
                 <td colSpan="6" className="no-data">No complaints available</td>
               </tr>
             ) : (
-              complaints.map((complaint) => (
+              filteredComplaints.map((complaint) => (
                 <tr key={complaint.id}>
                   <td>{complaint.tenant}</td>
                   <td>{complaint.complaint_number}</td>

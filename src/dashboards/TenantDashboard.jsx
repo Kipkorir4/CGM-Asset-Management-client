@@ -7,12 +7,12 @@ function TenantDashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="container">      
+    <div className="container">
       <h1 className="dashboard-title">Tenant Dashboard</h1>
       <div className="button-group">
         <button className="action-button" onClick={() => navigate('/tenant-dashboard/previous-complaints')}>Previous Complaints</button>
         <button className="action-button" onClick={() => navigate('/tenant-dashboard/file-complaint')}>File a Complaint</button>
-      </div>      
+      </div>
     </div>
   );
 }
@@ -20,52 +20,93 @@ function TenantDashboard() {
 // PreviousComplaints Component
 function PreviousComplaints() {
   const [complaints, setComplaints] = useState([]);
+  const [filteredComplaints, setFilteredComplaints] = useState([]);
+  const [searchCategory, setSearchCategory] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
   const userId = sessionStorage.getItem('user_id');
-  const baseURL = import.meta.env.VITE_API_URL
-
-  console.log("userId: ", userId)
+  const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${baseURL}/complaints/${userId}`, {
       method: 'GET',
-      credentials: 'include', // Include credentials in the request
+      credentials: 'include',
     })
       .then(response => response.json())
-      .then(data => setComplaints(data))
+      .then(data => {
+        setComplaints(data);
+        setFilteredComplaints(data);
+      })
       .catch(error => console.error('Error fetching complaints:', error));
-  }, [userId]);
+  }, [userId, baseURL]);
 
-  console.log("complaints", complaints)
+  useEffect(() => {
+    let filtered = complaints;
+
+    if (searchCategory) {
+      filtered = filtered.filter(complaint =>
+        complaint.category.toLowerCase().includes(searchCategory.toLowerCase())
+      );
+    }
+
+    if (statusFilter) {
+      filtered = filtered.filter(complaint => complaint.status === statusFilter);
+    }
+
+    setFilteredComplaints(filtered);
+  }, [searchCategory, statusFilter, complaints]);
 
   return (
     <div className="container">
       <h1 className="complaints-title">Previous Complaints</h1>
-      <ul className="complaints-list">
-        {complaints.map(complaint => (
-          <li key={complaint.id} className="complaint-item">
-            <span className="complaint-description">{complaint.description}</span> - 
-            <span className="complaint-category">{complaint.category}</span> - 
-            <span className="complaint-date">{complaint.date}</span> - 
-            <span className="complaint-status">{complaint.status}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search by category..."
+          value={searchCategory}
+          onChange={(e) => setSearchCategory(e.target.value)}
+        />
+      </div>
+      <div className="sort-buttons">
+        <p>Sort complaints by Status:</p>
+        <button onClick={() => setStatusFilter('')}>All</button>
+        <button onClick={() => setStatusFilter('Pending')}>Pending</button>
+        <button onClick={() => setStatusFilter('Accepted')}>Accepted</button>
+        <button onClick={() => setStatusFilter('Declined')}>Declined</button>
+      </div>
+      <table className="complaints-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredComplaints.map(complaint => (
+            <tr key={complaint.id} className="complaint-item">
+              <td className="complaint-description">{complaint.description}</td>
+              <td className="complaint-category">{complaint.category}</td>
+              <td className="complaint-date">{complaint.date}</td>
+              <td className="complaint-status">{complaint.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
-
 // FileComplaint Component
 function FileComplaint() {
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [message, setMessage] = useState('');
-  const baseURL = import.meta.env.VITE_API_URL
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = sessionStorage.getItem('user_id');
 
-    console.log('Sending', userId)
     fetch(`${baseURL}/complaints`, {
       method: 'POST',
       headers: {
@@ -88,7 +129,7 @@ function FileComplaint() {
   };
 
   return (
-    <div className="container">
+    <div className="card">
       <h1 className="file-complaint-title">File a Complaint</h1>
       <form className="complaint-form" onSubmit={handleSubmit}>
         <div className="form-group">
@@ -125,6 +166,7 @@ function FileComplaint() {
     </div>
   );
 }
+
 
 // TenantDashboardRoutes Component
 function TenantDashboardRoutes() {

@@ -11,7 +11,7 @@ function CEODashboard() {
       <h1 className="dashboard-title">CEO Dashboard</h1>
       <div className="button-group">
         <button className="action-button" onClick={() => navigate('/ceo-dashboard/view-cgm-affiliates')}>View CGM Affiliates</button>
-        <button className="action-button" onClick={() => navigate('/ceo-dashboard/view-complaints')}>View Complaints</button>
+        <button className="action-button" onClick={() => navigate('/ceo-dashboard/view-complaints')}>View Assets Repaired/Replaced (or to be)</button>
         <button className="action-button" onClick={() => navigate('/ceo-dashboard/enrollment-page')}>Enrollment Page</button>
       </div>
     </div>
@@ -20,63 +20,62 @@ function CEODashboard() {
 
 // ViewCGMAffiliates Component
 function ViewCGMAffiliates() {
-  const [tenants, setTenants] = useState([]);
-  const [procurementManagers, setProcurementManagers] = useState([]);
-  const [financeManagers, setFinanceManagers] = useState([]);
+  const [affiliates, setAffiliates] = useState([]);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    const fetchData = async (type, setter) => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`https://cgm-asset-management-server.onrender.com/users/${type}`);
+        const response = await fetch(`${baseURL}/all-users`);
         const data = await response.json();
-        setter(data);
+        setAffiliates(data); // Directly set the fetched data
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchData('tenant', setTenants);
-    fetchData('procurement-manager', setProcurementManagers);
-    fetchData('finance-manager', setFinanceManagers);
+    fetchData();
   }, []);
 
   return (
-    <div className="container">
-      <h1 className="title">View CGM Affiliates</h1>
-      <h2>Tenants</h2>
-      <ul className="list">
-        {tenants.map((tenant) => (
-          <li key={tenant.id} className="list-item">
-            {tenant.username} - {tenant.role}
-          </li>
-        ))}
-      </ul>
-      <h2>Procurement Managers</h2>
-      <ul className="list">
-        {procurementManagers.map((pm) => (
-          <li key={pm.id} className="list-item">
-            {pm.username} - {pm.role}
-          </li>
-        ))}
-      </ul>
-      <h2>Finance Managers</h2>
-      <ul className="list">
-        {financeManagers.map((fm) => (
-          <li key={fm.id} className="list-item">
-            {fm.username} - {fm.role}
-          </li>
-        ))}
-      </ul>
+    <div className="container1">
+      <h1 className="title1">View CGM Affiliates</h1>
+      <table className="table1">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          {affiliates.length === 0 ? (
+            <tr>
+              <td colSpan="3" className="empty-message">No affiliates found</td>
+            </tr>
+          ) : (
+            affiliates.map((affiliate, index) => (
+              <tr key={affiliate.id}>
+                <td>{index + 1}</td>
+                <td>{affiliate.username}</td>
+                <td>{affiliate.role}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }
 
+
 // ViewComplaints Component
 function ViewComplaints() {
   const [complaints, setComplaints] = useState([]);
+  const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch('https://cgm-asset-management-server.onrender.com/all-complaints')
+    fetch(`${baseURL}/all-complaints`)
       .then((response) => response.json())
       .then((data) => setComplaints(data))
       .catch((error) => console.error('Error fetching complaints:', error));
@@ -84,33 +83,49 @@ function ViewComplaints() {
 
   return (
     <div className="container">
-      <h1 className="title">View Complaints</h1>
-      <ul className="complaints-list">
-        {complaints.map((complaint) => (
-          <li key={complaint.complaint_number} className="complaint-item">
-            {complaint.tenant} - {complaint.category} - {complaint.description} - {complaint.status} - {complaint.amount_allocated || 0}
-          </li>
-        ))}
-      </ul>
+      <h1 className="title">Assets Repaired/Replaced</h1>
+      <table className="complaints-table">
+        <thead>
+          <tr>
+            <th>Tenant</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Amount Allocated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {complaints.map((complaint) => (
+            <tr key={complaint.complaint_number}>
+              <td>{complaint.tenant}</td>
+              <td>{complaint.category}</td>
+              <td>{complaint.description}</td>
+              <td>{complaint.status}</td>
+              <td>{complaint.amount_allocated || 0}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
-
 // EnrollmentPage Component
 function EnrollmentPage() {
   const [role, setRole] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('https://cgm-asset-management-server.onrender.com/enroll', {
+    fetch(`${baseURL}/enroll`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ role, username, password }),
+      body: JSON.stringify({ role, username, password, email }),
     })
       .then((response) => response.json())
       .then((data) => setMessage(data.message))
@@ -119,7 +134,7 @@ function EnrollmentPage() {
 
   return (
     <div className="container">
-      <h1 className="title">Enrollment Page</h1>
+      <h1 className="title">Enrollment Form</h1>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="role">User Type</label>
@@ -145,17 +160,31 @@ function EnrollmentPage() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            placeholder="Enter username for the new user..."
           />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
-            type="password"
+            type="text"
             id="password"
             className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Enter password for the new user..."
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="Enter email to send these Login details..."
           />
         </div>
         <button type="submit" className="submit-button">Create User</button>
