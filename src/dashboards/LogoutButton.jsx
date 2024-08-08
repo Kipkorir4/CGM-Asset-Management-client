@@ -5,10 +5,11 @@ import '../styles/LogoutButton.css';
 
 function LogoutButton() {
   const navigate = useNavigate();
+  const baseURL = import.meta.env.VITE_API_URL;
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:5000/logout');
+      await axios.post(`${baseURL}/logout`);
       sessionStorage.removeItem('userRole'); // Use sessionStorage
       navigate('/');
     } catch (error) {
