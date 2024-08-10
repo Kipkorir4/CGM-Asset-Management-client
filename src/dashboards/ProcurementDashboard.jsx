@@ -48,7 +48,9 @@ function ProcurementDashboard() {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container">   
+
+
       <h2>Procurement Manager Dashboard</h2>
       <div className="complaints-container">
         <table className="complaints-table">
