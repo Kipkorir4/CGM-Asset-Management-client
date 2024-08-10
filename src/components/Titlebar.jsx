@@ -1,12 +1,15 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import LogoutButton from '../dashboards/LogoutButton';
 import '../styles/Titlebar.css';
+import logo from '../assets/logunya.png';
 
 function Titlebar() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const userRole = sessionStorage.getItem('userRole');
 
   const handleTitleClick = () => {
-    const userRole = sessionStorage.getItem('userRole'); // Use sessionStorage
     if (userRole) {
       switch (userRole.toLowerCase().replace(' ', '-')) {
         case 'ceo':
@@ -16,10 +19,10 @@ function Titlebar() {
           navigate('/tenant-dashboard');
           break;
         case 'finance-manager':
-          navigate('/finance-dashboard');
+          navigate('/finance-manager-dashboard');
           break;
         case 'procurement-manager':
-          navigate('/procurement-dashboard');
+          navigate('/procurement-manager-dashboard');
           break;
         default:
           navigate('/');
@@ -29,9 +32,16 @@ function Titlebar() {
     }
   };
 
+  const isCentered = location.pathname === '/' || location.pathname.startsWith('/login');
+
   return (
-    <header className="titlebar" onClick={handleTitleClick}>
-      <h1 id='title'>CGM Properties</h1>
+    <header className={`titlebar ${isCentered ? 'centered' : 'dashboard'}`}>
+
+      <h1 id='title' onClick={handleTitleClick}>
+        <img className='logo' src={logo} alt="" onClick={handleTitleClick} />
+        CGM Properties
+      </h1>
+      {!isCentered && userRole && <LogoutButton />}
     </header>
   );
 }

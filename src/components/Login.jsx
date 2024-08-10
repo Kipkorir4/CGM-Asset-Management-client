@@ -22,6 +22,7 @@ function Login() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username, password, role }),
+      credentials: 'include', 
     })
     .then(response => response.json().then(data => ({ status: response.status, data })))  // Handle status code
     .then(({ status, data }) => {
@@ -42,10 +43,16 @@ function Login() {
     });
   };
 
+  // Capitalize the first letter of each word, special case for CEO
+  const formatRoleTitle = (role) => {
+    if (role.toLowerCase() === 'ceo') return 'CEO';
+    return role.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
   return (
-    <div>
-      <h1>{role.replace('-', ' ')} Login</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      <form onSubmit={handleSubmit} className="login-form">
+        <h1>{formatRoleTitle(role)} Login</h1>
         <div>
           <label htmlFor="username">Username</label>
           <input
