@@ -1,0 +1,57 @@
+/* General styles */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #2e2e2e;
+    /* Background color */
+}
+
+.landing-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+#landing-card-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    width: 90%;
+    max-width: 600px;
+}
+
+/* Card styles */
+.landing-card {
+    background-color: #212121;
+    /* Default card color */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    /* Fixed height for each card */
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.landing-card:hover {
+    background-color: gray;
+    /* Hover color */
+}
+
+/* Card headings */
+.landing-card h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.bank{
+    width: 15vh;
+    margin-left: 10px;
+}

@@ -1,0 +1,272 @@
+#tenant-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    align-items: start;
+    justify-content: center;
+    /* This centers the items within the container */
+    margin: 0 auto;
+    /* This centers the container within its parent */
+    max-width: 50%;
+    /* Ensure the container does not overflow */
+    padding: 0 20px;
+    /* Optional: add padding to the sides if needed */
+    color: #fff;
+}
+
+#tenant-card-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(5px);
+    /* Apply a 5px blur effect to the background */
+    z-index: -1;
+    /* Ensure it stays behind the content */
+}
+
+.tenant-card {
+    width: 300px;
+    height: 20vh;
+    background-color: #212121;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s;
+}
+
+.tenant-card:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    
+}
+
+
+.icon-button {
+    color: #fff;
+    background-color: transparent;
+    /* Makes the button background transparent */
+    border: none;
+    /* Removes the default button border */
+    padding: 10px;
+    /* Removes default padding */
+    cursor: pointer;
+    /* Changes the cursor to a pointer when hovering over the button */
+}
+
+.icon-button svg {
+    fill: currentColor;
+    /* Ensures the SVG icon uses the current text color */
+    width: 24px;
+    /* Adjust the width of the SVG icon */
+    height: 24px;
+    /* Adjust the height of the SVG icon */
+    transition: fill 0.3s;
+    /* Adds a transition effect when changing color */
+    margin: 3vh;
+}
+
+.icon-button:hover svg {
+    fill: #ffffff;
+    /* Changes the SVG color on hover */
+}
+
+.icon-button {
+    background-color: transparent;
+    /* Makes the button background transparent */
+    border: none;
+    /* Removes the default button border */
+    padding: 0;
+    /* Removes default padding */
+    cursor: pointer;
+    /* Changes the cursor to a pointer when hovering over the button */
+}
+
+.icon-button svg {
+    fill: currentColor;
+    /* Ensures the SVG icon uses the current text color */
+    width: 24px;
+    /* Adjust the width of the SVG icon */
+    height: 24px;
+    /* Adjust the height of the SVG icon */
+    transition: fill 0.3s;
+    /* Adds a transition effect when changing color */
+}
+
+.icon-button:hover svg {
+    fill: #ffffff;
+    /* Changes the SVG color on hover */
+}
+
+
+/* sdfghjkl */
+/* PreviousComplaints Component Styles */
+.complaints-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.complaints-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.complaints-list {
+  list-style: none;
+  padding: 0;
+}
+
+.complaint-item {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.complaint-description,
+.complaint-category,
+.complaint-date,
+.complaint-status {
+  margin: 0 5px;
+}
+
+/* file complaint */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  border: gray solid;
+  width: 40%;
+  margin: auto;
+  border-radius: 5px;
+  backdrop-filter: blur(50px);
+}
+
+.dashboard-title,
+.complaints-title,
+.file-complaint-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.action-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.action-button:hover {
+  background-color: #45a049;
+}
+
+.complaints-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.complaint-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.complaint-description,
+.complaint-category,
+.complaint-date {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.complaint-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+textarea.form-control {
+  height: 100px;
+}
+
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+
+  .dashboard-title,
+  .complaints-title,
+  .file-complaint-title {
+    font-size: 1.5em;
+  }
+
+  .action-button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+
+  .complaint-form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 568px){
+  .container{
+    width: 95%;
+  }
+}

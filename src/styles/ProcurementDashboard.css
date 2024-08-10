@@ -1,0 +1,28 @@
+.dashboard-container {
+    padding: 20px;
+}
+
+.complaints-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.complaints-table th,
+.complaints-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.complaints-table th {
+    background-color: #f4f4f4;
+}
+
+.complaints-table .no-data {
+    text-align: center;
+    font-style: italic;
+}
+
+.complaint-actions button {
+    margin-right: 10px;
+}
