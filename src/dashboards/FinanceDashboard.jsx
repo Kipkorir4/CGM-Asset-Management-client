@@ -1,62 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchComplaints, allocateBudget, declineComplaint } from './actions/complaintActions';
 import '../styles/FinanceDashboard.css';
 
 function FinanceDashboard() {
-  const [complaints, setComplaints] = useState([]);
-  const [allocationAmount, setAllocationAmount] = useState('');
+  const dispatch = useDispatch();
+  const { complaints, loading, error } = useSelector(state => state);
+  const [allocationAmount, setAllocationAmount] = React.useState('');
 
   useEffect(() => {
-    fetch('https://cgm-asset-management-server.onrender.com/accepted-complaints', {
-      method: 'GET',
-      credentials: 'include', // Include credentials in the request
-    })
-      .then(response => response.json())
-      .then(data => setComplaints(data))
-      .catch(error => console.error('Error fetching complaints:', error));
-  }, []);
+    dispatch(fetchComplaints());
+  }, [dispatch]);
 
   const handleAllocate = (complaintId) => {
-    fetch(`https://cgm-asset-management-server.onrender.com/allocate-budget/${complaintId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ amount: allocationAmount }),
-      credentials: 'include', // Include credentials in the request
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          setComplaints(prevComplaints => prevComplaints.map(c => {
-            if (c.id === complaintId) {
-              return { ...c, amountAllocated: allocationAmount };
-            }
-            return c;
-          }));
-          alert(`This complaint ${data.complaint_number} was allocated a budget of ${allocationAmount}`);
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch(error => console.error('Error allocating budget:', error));
+    dispatch(allocateBudget(complaintId, allocationAmount));
+    alert(`Complaint ${complaintId} was allocated a budget of ${allocationAmount}`);
   };
 
   const handleDecline = (complaintId) => {
-    fetch(`https://cgm-asset-management-server.onrender.com/decline-complaint/${complaintId}`, {
-      method: 'POST',
-      credentials: 'include', // Include credentials in the request
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          setComplaints(prevComplaints => prevComplaints.filter(c => c.id !== complaintId));
-          alert(`Complaint ${complaintId} has been declined.`);
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch(error => console.error('Error declining complaint:', error));
+    dispatch(declineComplaint(complaintId));
+    alert(`Complaint ${complaintId} has been declined.`);
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="dashboard-container">
@@ -98,7 +65,7 @@ function FinanceDashboard() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              handleAllocate(allocationAmount);
+              handleAllocate(complaints[0]?.id); // Adjust according to your logic
             }}
           >
             <div className="form-group">

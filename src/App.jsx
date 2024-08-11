@@ -9,9 +9,13 @@ import LandingPage from './components/LandingPage';
 import Titlebar from './components/Titlebar';
 import Footer from './components/Footer';
 import './styles/App.css';
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
   return (
+    <Provider store={store}>
+      <App />
     <Router>
       <div className="app">
         <Titlebar />
@@ -28,6 +32,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </Provider>
   );
 }
 
