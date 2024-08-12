@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/Footer.css';
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
   return (
     <div className="footer">
       <div className="socials-container">
@@ -51,17 +52,16 @@ function Footer() {
         </ul>
       </div>
 
-      {/* <div className="copyright">
-          <a href="https://example.com/terms-of-service">Terms of Service</a> |
-          <span>
-            <a href="https://example.com/privacy-policy">Privacy Policy</a> |
-            
-            <a href="https://example.com/accessibility-statement">Accessibility Statement</a>
-          </span>
-          <span>
-            © 2022 MyApp. All rights reserved.
-          </span>
-      </div> */}
+      <div className="copyright">
+        <a href="https://docs.google.com/document/d/1Rb0uDxYiuXkePJMGO72mE-a149CTbfhDuzGF1AkUQWU/edit">Terms of Service</a> |
+        <span>
+          <a href="https://example.com/privacy-policy">Privacy Policy</a> |
+          <a href="https://example.com/accessibility-statement">Accessibility Statement</a>
+        </span>
+        <span>
+          © {currentYear} CGM Properties. All rights reserved.
+        </span>
+      </div>
     </div>
   );
 };

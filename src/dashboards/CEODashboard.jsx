@@ -113,22 +113,30 @@ function ViewComplaints() {
 function EnrollmentPage() {
   const [role, setRole] = useState('');
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const baseURL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     fetch(`${baseURL}/enroll`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ role, username, password, email }),
+      body: JSON.stringify({ role, username, email }),
     })
-      .then((response) => response.json())
-      .then((data) => setMessage(data.message))
+      .then((response) => response.json().then(data => ({status: response.status, body: data})))
+      .then(({ status, body }) => {
+        setMessage(body.message);
+        if (status === 201) {
+          // Remain on the same page, simply display the success message
+          setRole('');
+          setUsername('');
+          setEmail('');
+        }
+      })
       .catch(() => setMessage('An error occurred. Please try again.'));
   };
 
@@ -164,18 +172,6 @@ function EnrollmentPage() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="text"
-            id="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Enter password for the new user..."
-          />
-        </div>
-        <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -184,7 +180,7 @@ function EnrollmentPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            placeholder="Enter email to send these Login details..."
+            placeholder="Enter email to send set-password link..."
           />
         </div>
         <button type="submit" className="submit-button">Create User</button>
@@ -193,7 +189,6 @@ function EnrollmentPage() {
     </div>
   );
 }
-
 // CEODashboardRoutes Component
 function CEODashboardRoutes() {
   return (

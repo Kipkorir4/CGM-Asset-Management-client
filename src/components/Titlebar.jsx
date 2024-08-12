@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import LogoutButton from '../dashboards/LogoutButton';
 import '../styles/Titlebar.css';
+import logo from '../assets/cgm.jpg'; // Adjust path to your logo
 
 function Titlebar() {
   const navigate = useNavigate();
@@ -35,9 +36,11 @@ function Titlebar() {
 
   return (
     <header className={`titlebar ${isCentered ? 'centered' : 'dashboard'}`}>
-      <h1 id='title' onClick={handleTitleClick}>
-        CGM Properties
-      </h1>
+      <div className="logo-container" onClick={handleTitleClick}>
+        <img src={logo} alt="Logo" className="logo" />
+        {!isCentered && <h1 className="title-left">CGM Properties</h1>}
+      </div>
+      {isCentered && <h1 className="title-center" onClick={handleTitleClick}>CGM Properties</h1>}
       {!isCentered && userRole && <LogoutButton />}
     </header>
   );

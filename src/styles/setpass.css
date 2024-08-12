@@ -1,5 +1,5 @@
-/* Centering the login form */
-.login-container8 {
+/* Centering the set password form */
+.container2 {
     color: white;
     background: url('../assets/pexels-jovydas-2462015.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -8,11 +8,11 @@
     justify-content: center;
     height: 100vh;
     padding: 20px;
+    /* Add padding for smaller screens */
     box-sizing: border-box;
 }
 
-/* Login form styling */
-.login-form8 {
+.form2 {
     background-color: rgba(51, 51, 51, 0.8);
     /* Semi-transparent #333 */
     padding: 30px;
@@ -24,16 +24,17 @@
 }
 
 /* Form elements */
-.login-form8 h1 {
+.title2 {
     color: white;
     margin-bottom: 20px;
 }
 
-.label8 {
-    font-size: 20px;
+.form-group2 {
+    margin-bottom: 20px;
+    position: relative;
 }
 
-.login-form8 .label8 {
+.form-group2 label {
     display: block;
     color: white;
     margin-bottom: 5px;
@@ -42,16 +43,11 @@
 
 .password-input-container {
     position: relative;
-    margin-bottom: 20px;
 }
 
-.logininput8 {
+.form-control2 {
     width: 100%;
     padding: 10px;
-    padding-right: 40px;
-    /* Space for the eye icon */
-    margin-bottom: 0;
-    /* Adjust margin for spacing */
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: white;
@@ -60,17 +56,17 @@
     height: 40px;
 }
 
-.eye-icon {
+.password-eye-icon {
     position: absolute;
-    right: 10px;
     top: 50%;
+    right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
     color: #333;
     font-size: 20px;
 }
 
-.login-form8 button {
+.submit-button2 {
     width: 100%;
     padding: 10px;
     border: none;
@@ -82,50 +78,46 @@
     transition: background-color 0.3s;
     font-weight: bolder;
     font-size: 22px;
-    
 }
 
-.login-form8 button:hover {
+.submit-button2:hover {
     background-color: white;
     color: black;
 }
 
-.login-form8 p {
+.message2 {
     color: white;
     margin-top: 10px;
 }
 
-.forgot-password8 {
-    cursor: pointer;
-    color: #ccc;
-    text-decoration: none;
+.message2.success {
+    color: lightgreen;
 }
 
-.forgot-password8:hover {
-    color: white;
-    text-decoration: underline;
+.message2.error {
+    color: red;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .login-form8 {
+    .form2 {
         padding: 20px;
         max-width: 90%;
         /* Adjust width for smaller screens */
     }
 
-    .login-form8 h1 {
+    .title2 {
         font-size: 1.5rem;
         /* Adjust heading size for smaller screens */
     }
 
-    .logininput8 {
+    .form-control2 {
         padding: 8px;
         font-size: 14px;
         /* Adjust input font size for smaller screens */
     }
 
-    .login-form8 button {
+    .submit-button2 {
         padding: 8px;
         font-size: 14px;
         /* Adjust button font size for smaller screens */
@@ -133,24 +125,24 @@
 }
 
 @media (max-width: 480px) {
-    .login-form8 {
+    .form2 {
         padding: 15px;
         max-width: 100%;
         /* Ensure form fits within very small screens */
     }
 
-    .login-form8 h1 {
+    .title2 {
         font-size: 1.2rem;
         /* Further adjust heading size for very small screens */
     }
 
-    .logininput8 {
+    .form-control2 {
         padding: 6px;
         font-size: 12px;
         /* Further adjust input font size for very small screens */
     }
 
-    .login-form8 button {
+    .submit-button2 {
         padding: 6px;
         font-size: 12px;
         /* Further adjust button font size for very small screens */
