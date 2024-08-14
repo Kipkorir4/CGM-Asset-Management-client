@@ -5,20 +5,24 @@ function ProcurementDashboard() {
   const [complaints, setComplaints] = useState([]);
   const [filteredComplaints, setFilteredComplaints] = useState([]);
   const [filter, setFilter] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const [perPage] = useState(10); // Number of complaints per page
   const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetchComplaints();
-  }, []);
+  }, [currentPage]);
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch(`${baseURL}/fetch_all_complaints`, {
+      const response = await fetch(`${baseURL}/fetch_all_complaints?page=${currentPage}&per_page=${perPage}`, {
         credentials: 'include',
       });
       const data = await response.json();
-      setComplaints(data);
-      setFilteredComplaints(data);
+      setComplaints(data.complaints);
+      setTotalCount(data.total_count);
+      setFilteredComplaints(data.complaints);
     } catch (error) {
       console.error('Error fetching complaints:', error);
     }
@@ -31,20 +35,7 @@ function ProcurementDashboard() {
         credentials: 'include',
       });
       if (response.ok) {
-        setComplaints((prevComplaints) =>
-          prevComplaints.map((complaint) =>
-            complaint.id === complaintId
-              ? { ...complaint, status: action === 'accept' ? 'Accepted' : 'Declined' }
-              : complaint
-          )
-        );
-        setFilteredComplaints((prevComplaints) =>
-          prevComplaints.map((complaint) =>
-            complaint.id === complaintId
-              ? { ...complaint, status: action === 'accept' ? 'Accepted' : 'Declined' }
-              : complaint
-          )
-        );
+        fetchComplaints(); // Re-fetch complaints to update the list
       } else {
         console.error('Error handling complaint action:', await response.json());
       }
@@ -68,6 +59,12 @@ function ProcurementDashboard() {
     );
     setFilteredComplaints(filtered);
   };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const totalPages = Math.ceil(totalCount / perPage);
 
   return (
     <div className="dashboard-container">
@@ -97,13 +94,14 @@ function ProcurementDashboard() {
               <th>Category</th>
               <th>Description</th>
               <th>Date Filed</th>
+              <th>Image</th> {/* New column for image */}
               <th>Actions/Status</th>
             </tr>
           </thead>
           <tbody>
             {filteredComplaints.length === 0 ? (
               <tr>
-                <td colSpan="6" className="no-data">No complaints available</td>
+                <td colSpan="7" className="no-data">No complaints available</td>
               </tr>
             ) : (
               filteredComplaints.map((complaint) => (
@@ -113,6 +111,17 @@ function ProcurementDashboard() {
                   <td>{complaint.category}</td>
                   <td>{complaint.description}</td>
                   <td>{complaint.date}</td>
+                  <td className="complaint-image">
+                    {complaint.image_url ? (
+                      <img
+                        src={complaint.image_url}
+                        alt={`Complaint Image ${complaint.id}`}
+                        style={{ maxWidth: '150px', maxHeight: '150px' }}
+                      />
+                    ) : (
+                      'No Image'
+                    )}
+                  </td>
                   <td>
                     {complaint.status === 'Accepted' ? (
                       <button className="accepted-button" disabled>Accepted</button>
@@ -134,6 +143,23 @@ function ProcurementDashboard() {
             )}
           </tbody>
         </table>
+      </div>
+      <div className="pagination-controls">
+        <button
+          className="pagination-button6"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button
+          className="pagination-button6"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

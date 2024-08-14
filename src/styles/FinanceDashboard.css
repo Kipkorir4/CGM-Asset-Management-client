@@ -1,104 +1,182 @@
-.dashboard-container {
-    padding: 20px;
-    width: 100%;
+.main11 {
+    background: url('../assets/pexels-karolina-grabowska-4475523.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
 
-.content {
+.dashboard-container11 {
+    
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.h211{
+    background-color: #333;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 0px;
+}
+
+.content11 {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.table-container {
-    width: 60%;
+.table-container11 {
+    flex: 3;
+    max-width: 100%;
 }
 
-table {
+.table11 {
     width: 100%;
     border-collapse: collapse;
+    background-color: #444;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-thead {
-    background-color: #f4f4f4;
+.thead11 {
+    background-color: #555;
 }
 
-th,
-td {
+.th11,
+.td11 {
     padding: 10px;
     text-align: left;
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #666;
 }
 
-.form-container {
-    width: 35%;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
+.td11 {
     color: white;
+}
+
+.button11 {
+    background-color: black;
+    color: #ff5e6c;
+    padding: 8px 8px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.view-allocated-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
+.button111{
+    background-color: #444;
     color: white;
+    width: 85%;
+    padding: 8px 8px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.view-allocated-button:hover {
-    background-color: #0056b3;
+.button11:hover {
+    background-color: #555;
 }
 
-.navbar {
-    background-color: #333;
-    overflow: hidden;
+.form-container11 {
+    flex: 1;
+    max-width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
 }
 
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.form11 {
     display: flex;
+    flex-direction: column;
 }
 
-.navbar li {
-    padding: 14px 20px;
-}
-
-.navbar li a {
+.input11 {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
     color: white;
-    text-decoration: none;
-    display: block;
 }
 
-.navbar li a:hover {
-    background-color: #575757;
+.label11 {
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-form {
-    border: 1px;
+h2,
+h4 {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .content11 {
+        flex-direction: column;
+    }
+
+    .table-container11,
+    .form-container11 {
+        max-width: 100%;
+    }
+}
+
+
+.allocated-complaints-container11{
+    color: white;
+}
+
+.current-budget-balances-container11{
+    color: white;
+}
+
+/* Button Container Styling */
+.button-container11 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 50px;
+    padding: 20px;
+    background-color: #333;
+    /* Background color for the container */
+    border-radius: 5px;
+    /* Rounded corners for the container */
+    margin-top: 20px;
+    /* Margin between the container and the table */
+}
+
+/* Button Styling */
+.view-allocated-button11,
+.view-balances-button11 {
+    background-color: #444;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.view-allocated-button11:hover,
+.view-balances-button11:hover {
+    background-color: #555;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .button-container11 {
+        flex-direction: column;
+    }
+
+    .view-allocated-button11,
+    .view-balances-button11 {
+        width: 100%;
+        text-align: center;
+    }
 }

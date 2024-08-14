@@ -80,7 +80,7 @@ function Login() {
             </span>
           </div>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className='button8'>Login</button>
         {error && <p>{error}</p>}
         <p className="forgot-password8" onClick={handleForgotPassword}>Forgot Password?</p>
       </form>

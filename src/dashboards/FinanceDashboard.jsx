@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import '../styles/FinanceDashboard.css';
+// import '../styles/FinanceDashboard.css';
 
 function FinanceDashboard() {
   const [complaints, setComplaints] = useState([]);
   const [complaintNumber, setComplaintNumber] = useState('');
   const [allocationAmount, setAllocationAmount] = useState('');
+  const [totalComplaints, setTotalComplaints] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [complaintsPerPage] = useState(10);
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${baseURL}/accepted-complaints`, {
+    fetch(`${baseURL}/accepted-complaints?page=${currentPage}&limit=${complaintsPerPage}`, {
       method: 'GET',
       credentials: 'include',
     })
       .then(response => response.json())
-      .then(data => setComplaints(data))
+      .then(data => {
+        setComplaints(data.complaints);
+        setTotalComplaints(data.total);
+      })
       .catch(error => console.error('Error fetching complaints:', error));
-  }, [baseURL]);
+  }, [baseURL, currentPage, complaintsPerPage]);
 
   const handleAllocate = () => {
     const complaint = complaints.find(c => c.complaintNumber === complaintNumber);
@@ -68,179 +74,261 @@ function FinanceDashboard() {
       .catch(error => console.error('Error declining complaint:', error));
   };
 
+  const totalPages = Math.ceil(totalComplaints / complaintsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
+
   return (
-    <div className="dashboard-container">
-      <h2>Finance Manager Dashboard</h2>
-      <div className="content">
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Complaint Number</th>
-                <th>Complaint Category</th>
-                <th>Budget Balance</th>
-                <th>Amount Allocated</th>
-                <th>Allocation Status</th>
-                <th>Decline</th>
-              </tr>
-            </thead>
-            <tbody>
-              {complaints.length > 0 ? (
-                complaints.map(complaint => (
-                  <tr key={complaint.id}>
-                    <td>{complaint.complaintNumber}</td>
-                    <td>{complaint.category}</td>
-                    <td>{complaint.budgetBalance}</td>
-                    <td>{complaint.amountAllocated || '-'}</td>
-                    <td>{complaint.amountAllocated ? 'Allocated' : 'Unallocated'}</td>
-                    <td>
-                      <button onClick={() => handleDecline(complaint.id)}>Decline</button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6">No data available</td>
+    <div className='main11'>
+      <h2 className='h211'>Finance Manager Dashboard</h2>
+      <div className='button-container11'>
+        <button className="view-allocated-button11" onClick={() => navigate('allocated-complaints')}>
+          Approved Allocations
+        </button>
+        <button className="view-balances-button11" onClick={() => navigate('current-budget-balances')}>
+          Budget Balances
+        </button>
+      </div>
+      <div className="dashboard-container11">
+        <div className="content11">
+          <div className="table-container11">
+            <table className='table11'>
+              <thead className='thead11'>
+                <tr className='tr11'>
+                  <th className='th11'>Complaint Number</th>
+                  <th className='th11'>Complaint Category</th>
+                  <th className='th11'>Amount Allocated</th>
+                  <th className='th11'>Allocation Status</th>
+                  <th className='th11'>Decline</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-        <div className="form-container">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleAllocate();
-            }}
-          >
-            <div className="form-group">
-              <h4>Allocation Form</h4>
-              <label htmlFor="complaintNumber"></label>
-              <input
-                type="text"
-                id="complaintNumber"
-                value={complaintNumber}
-                onChange={(e) => setComplaintNumber(e.target.value)}
-                required
-                placeholder="Enter Complaint Number..."
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="allocationAmount"></label>
-              <input
-                type="number"
-                id="allocationAmount"
-                value={allocationAmount}
-                onChange={(e) => setAllocationAmount(e.target.value)}
-                required
-                placeholder="Enter amount to allocate..."
-              />
-            </div>
-            <button type="submit">Allocate</button>
-          </form>
-          <button className="view-allocated-button" onClick={() => navigate('allocated-complaints')}>
-            Approved Allocations
-          </button>
-          <button className="view-balances-button" onClick={() => navigate('current-budget-balances')}>
-            Budget Balances
-          </button>
+              </thead>
+              <tbody className='tbody11'>
+                {complaints.length > 0 ? (
+                  complaints.map(complaint => (
+                    <tr key={complaint.id} className='tr11'>
+                      <td className='td11'>{complaint.complaintNumber}</td>
+                      <td className='td11'>{complaint.category}</td>
+                      <td className='td11'>{complaint.amountAllocated || '-'}</td>
+                      <td className='td11'>{complaint.amountAllocated ? 'Allocated' : 'Unallocated'}</td>
+                      <td className='td11'>
+                        <button onClick={() => handleDecline(complaint.id)} className='button11'>Insufficient</button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr className='tr11'>
+                    <td colSpan="6" className='td11'>No data available</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="pagination11">
+            <button onClick={handlePreviousPage} disabled={currentPage === 1} className='button11'>Previous</button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button onClick={handleNextPage} disabled={currentPage === totalPages} className='button11'>Next</button>
+          </div>
+
+          <div className="form-container11">
+            <form
+              className='form11'
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleAllocate();
+              }}
+            >
+              <div className="form-group11">
+                <h4>Allocation Form</h4>
+                <label htmlFor="complaintNumber" className='label11'> Complaint Number</label>
+                <input
+                  className='input11'
+                  type="text"
+                  id="complaintNumber11"
+                  value={complaintNumber}
+                  onChange={(e) => setComplaintNumber(e.target.value)}
+                  required
+                  placeholder="Enter Complaint Number..."
+                />
+              </div>
+              <div className="form-group11">
+                <label htmlFor="allocationAmount" className='label11'>Allocation Amount</label>
+                <input
+                  className='input11'
+                  type="number"
+                  id="allocationAmount11"
+                  value={allocationAmount}
+                  onChange={(e) => setAllocationAmount(e.target.value)}
+                  required
+                  placeholder="Enter amount to allocate..."
+                />
+              </div>
+              <button className='button111' type="submit">Allocate</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
+// approved allocations route
 function AllocatedComplaints() {
   const [allocatedComplaints, setAllocatedComplaints] = useState([]);
+  const [totalComplaints, setTotalComplaints] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [complaintsPerPage] = useState(10);
   const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${baseURL}/allocated-complaints`, {
+    fetch(`${baseURL}/allocated-complaints?page=${currentPage}&limit=${complaintsPerPage}`, {
       method: 'GET',
       credentials: 'include',
     })
       .then(response => response.json())
-      .then(data => setAllocatedComplaints(data))
+      .then(data => {
+        setAllocatedComplaints(data.complaints);
+        setTotalComplaints(data.total);
+      })
       .catch(error => console.error('Error fetching approved complaints:', error));
-  }, [baseURL]);
+  }, [baseURL, currentPage, complaintsPerPage]);
+
+  const totalPages = Math.ceil(totalComplaints / complaintsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
 
   return (
-    <div className="allocated-complaints-container">
+    <div className="allocated-complaints-container11">
       <h1>Approved Allocations</h1>
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Complaint Number</th>
-              <th>Amount Allocated</th>
+      <div className="table-container11">
+        <table className='table11'>
+          <thead className='thead11'>
+            <tr className='tr11'>
+              <th className='th11'>Category</th>
+              <th className='th11'>Complaint Number</th>
+              <th className='th11'>Amount Allocated</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='tbody11'>
             {allocatedComplaints.length > 0 ? (
               allocatedComplaints.map((complaint, index) => (
-                <tr key={index}>
-                  <td>{complaint.category}</td>
-                  <td>{complaint.complaint_number}</td>
-                  <td>{complaint.amount_allocated}</td>
+                <tr key={index} className='tr11'>
+                  <td className='td11'>{complaint.category}</td>
+                  <td className='td11'>{complaint.complaint_number}</td>
+                  <td className='td11'>{complaint.amount_allocated}</td>
                 </tr>
               ))
             ) : (
-              <tr>
-                <td colSpan="3">No allocated complaints available</td>
+              <tr className='tr11'>
+                <td colSpan="3" className='td11'>No allocated complaints available</td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
+
+      <div className="pagination11">
+        <button onClick={handlePreviousPage} disabled={currentPage === 1} className='button11'>Previous</button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages} className='button11'>Next</button>
+      </div>
     </div>
   );
 }
 
+// current budgrt balances route
 function CurrentBudgetBalances() {
   const [balances, setBalances] = useState([]);
+  const [totalBalances, setTotalBalances] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [balancesPerPage] = useState(10);
   const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${baseURL}/current-budget-balances`, {
+    fetch(`${baseURL}/current-budget-balances?page=${currentPage}&limit=${balancesPerPage}`, {
       method: 'GET',
       credentials: 'include',
     })
       .then(response => response.json())
-      .then(data => setBalances(data))
+      .then(data => {
+        setBalances(data.balances);
+        setTotalBalances(data.total);
+      })
       .catch(error => console.error('Error fetching budget balances:', error));
-  }, [baseURL]);
+  }, [baseURL, currentPage, balancesPerPage]);
+
+  const totalPages = Math.ceil(totalBalances / balancesPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+    }
+  };
 
   return (
-    <div className="current-budget-balances-container">
+    <div className="current-budget-balances-container11">
       <h1>Current Budget Balances</h1>
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Balance Amount</th>
+      <div className="table-container11">
+        <table className='table11'>
+          <thead className='thead11'>
+            <tr className='tr11'>
+              <th className='th11'>Category</th>
+              <th className='th11'>Balance Amount</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='tbody11'>
             {balances.length > 0 ? (
               balances.map((balance, index) => (
-                <tr key={index}>
-                  <td>{balance.category}</td>
-                  <td>{balance.balance_amount}</td>
+                <tr key={index} className='tr11'>
+                  <td className='td11'>{balance.category}</td>
+                  <td className='td11'>{balance.balance_amount}</td>
                 </tr>
               ))
             ) : (
-              <tr>
-                <td colSpan="2">No budget balances available</td>
+              <tr className='tr11'>
+                <td colSpan="2" className='td11'>No budget balances available</td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
+
+      <div className="pagination11">
+        <button onClick={handlePreviousPage} disabled={currentPage === 1} className='button11'>Previous</button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages} className='button11'>Next</button>
+      </div>
     </div>
   );
 }
+
+
 
 function FinanceDashboardRoutes() {
   return (

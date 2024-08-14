@@ -131,31 +131,39 @@
 }
 
 .accept-button {
-  background-color: #90ee90;
+  background-color: #64ff64;
   /* Light green background */
-  color: #155724;
+  color: white;
 }
 
 .decline-button {
-  background-color: #ffaab1;
+  background-color: #ff5e6c;
   /* Light red/pink background */
-  color: #721c24;
+  color: white;
 }
 
 .accepted-button {
-  background-color: #90ee90;
+  background-color: #333;
   /* Light gray background for disabled buttons */
-  color: #6c757d;
+  color: #64ff64;
   cursor: not-allowed;
   /* Not-allowed cursor for disabled state */
 }
 
+.accepted-button:hover{
+  background-color: #333;
+}
+
 .declined-button {
-  background-color: #ffaab1;
+  background-color: #333;
   /* Light gray background for disabled buttons */
-  color: #6c757d;
+  color: #ff5e6c;
   cursor: not-allowed;
   /* Not-allowed cursor for disabled state */
+}
+
+.declined-button:hover {
+  background-color: #ffaab1;
 }
 
 /* Hover effects for interactive buttons */
@@ -166,12 +174,12 @@
 }
 
 .accept-button:hover {
-  background-color: #8fbc8f;
+  background-color: #028202;
   /* Slightly darker light green on hover */
 }
 
 .decline-button:hover {
-  background-color: #f4c2c3;
+  background-color: #9d0306;
   /* Slightly darker light red/pink on hover */
 }
 

@@ -3,32 +3,53 @@
     color: #fff;
     text-align: center;
     padding: 20px;
-    position: relative;
-    bottom: 0;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .socials-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    /* Adjust as needed */
+    gap: 10px;
+    /* Reduced gap for smaller screens */
+}
+
+@media (min-width: 600px) {
+    .socials-container {
+        flex-direction: row;
+        gap: 20px;
+        /* Adjust for larger screens */
+    }
 }
 
 .socials-title {
     font-size: 1.5em;
-    margin-right: 20px;
-    /* Space between the title and the icons */
+    margin-bottom: 10px;
     color: #fff;
+}
+
+@media (min-width: 600px) {
+    .socials-title {
+        margin-right: 20px;
+        margin-bottom: 0;
+        /* Adjust title position for larger screens */
+    }
 }
 
 .footer .wrapper {
     list-style: none;
     padding: 0;
     display: flex;
-    gap: 20px;
-    /* Space between icons */
+    gap: 10px;
+}
+
+@media (min-width: 600px) {
+    .footer .wrapper {
+        gap: 20px;
+        /* Increase space between icons on larger screens */
+    }
 }
 
 .footer .icon {
@@ -41,27 +62,6 @@
     height: 24px;
     fill: #fff;
     transition: fill 0.3s ease;
-}
-
-.wrapper .facebook:hover,
-.wrapper .facebook:hover .tooltip,
-.wrapper .facebook:hover .tooltip::before {
-    background: #0066ff;
-    color: #fff;
-}
-
-.wrapper .twitter:hover,
-.wrapper .twitter:hover .tooltip,
-.wrapper .twitter:hover .tooltip::before {
-    background: #1da1f2;
-    color: #fff;
-}
-
-.wrapper .instagram:hover,
-.wrapper .instagram:hover .tooltip,
-.wrapper .instagram:hover .tooltip::before {
-    background: #d62976;
-    color: #fff;
 }
 
 .footer .tooltip {
@@ -87,6 +87,9 @@
     margin-top: 20px;
     font-size: 14px;
     color: #ccc;
+    padding: 10px 20px;
+    /* Ensure text is properly contained */
+    box-sizing: border-box;
 }
 
 .copyright a {
@@ -96,4 +99,11 @@
 
 .copyright a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 599px) {
+    .copyright {
+        font-size: 12px;
+        /* Adjust font size for smaller screens */
+    }
 }

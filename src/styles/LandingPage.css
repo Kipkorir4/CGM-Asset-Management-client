@@ -2,6 +2,16 @@ body {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.h30 {
+    text-align: center;
+    font-size: 25px;
+    margin: 0;
+    padding: 10px 0;
+    /* Added padding for spacing */
+}
+
+
 .card0 {
     background-color: #f5f5f5;
     border: 1px solid #ddd;
@@ -11,13 +21,12 @@ body {
     transition: transform 1s, box-shadow 0.3s;
 }
 
-
+/* Container styles */
 .landing-page0 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1;
     background-image: url('../assets/pexels-sevenstormphotography-439391.jpg');
     background-size: cover;
     background-position: center;
@@ -37,7 +46,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Adjust opacity as needed */
+    /* Dark overlay */
     z-index: 1;
 }
 
@@ -53,7 +62,7 @@ body {
     /* Ensures padding doesn't cause overflow */
 }
 
-/* Adjust grid layout based on screen size */
+/* Grid layout adjustments */
 @media (min-width: 768px) {
     .title-cards0 {
         grid-template-columns: 1fr 1fr;
@@ -63,20 +72,37 @@ body {
 @media (max-width: 767px) {
     .title-cards0 {
         grid-template-columns: 1fr;
+        padding: 10px;
+        /* Adjust padding for smaller screens */
     }
 }
 
+/* Styles for specific cards */
 .card0 {
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     padding: 40px;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .card0:hover {
-    /* background-color: #9a9a9a; */
-    transform: scale(1.05); /* Slightly increase the size */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add a shadow to make it "pop" */
+    transform: scale(1.05);
+    /* Slightly increase the size */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Add a shadow to make it "pop" */
+}
+
+/* Add specific margin for targeted cards on small screens */
+@media (max-width: 767px) {
+    .title-cards0 .card0:first-child {
+        margin-bottom: 20px;
+        /* Add space below the first card */
+    }
+
+    .title-cards0 .card0:last-child {
+        margin-top: 20px;
+        /* Add space above the last card */
+    }
 }

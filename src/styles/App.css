@@ -6,6 +6,7 @@
 
 .main-content {
     flex: 1;
-    padding-top: 60px; /* Adjust based on the height of your titlebar */
+    padding-top: 10px; /* Adjust based on the height of your titlebar */
     padding-bottom: 40px; /* Adjust based on the height of your footer */
 }
+

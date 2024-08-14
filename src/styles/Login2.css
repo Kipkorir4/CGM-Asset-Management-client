@@ -46,7 +46,7 @@
 }
 
 .logininput8 {
-    width: 100%;
+    width:86%;
     padding: 10px;
     padding-right: 40px;
     /* Space for the eye icon */
@@ -56,8 +56,12 @@
     border-radius: 4px;
     background-color: white;
     color: #333;
-    font-size: 18px;
+    font-size: 20px;
     height: 40px;
+}
+
+.button8{
+    width:55%;
 }
 
 .eye-icon {

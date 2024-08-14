@@ -10,7 +10,7 @@ import Titlebar from './components/Titlebar';
 import Footer from './components/Footer';
 import SetPassword from './components/SetPassword';
 import ForgotPassword from './components/ForgotPassword';
-import ResetPassword from './components/ResetPassword';  // Import the new component
+import ResetPassword from './components/ResetPassword';
 import './styles/App.css';
 
 function App() {

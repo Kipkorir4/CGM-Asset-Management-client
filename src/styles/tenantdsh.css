@@ -1,7 +1,6 @@
 /* General Container for Dashboard */
 .container09 {
   position: relative;
-  /* Needed for the overlay */
   background: url('../assets/tenant.png') no-repeat center center fixed;
   background-size: cover;
   color: white;
@@ -10,6 +9,8 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  box-sizing: border-box;
+  /* Ensure padding does not affect width */
 }
 
 .container09::before {
@@ -20,54 +21,48 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.6);
-  /* Dark overlay, adjust opacity as needed */
   z-index: 0;
 }
 
-.dashboard-title09,
-.button-group09 {
-  position: relative;
-  z-index: 1;
-  /* Ensure content is above the overlay */
-}
-
-/* Tenant Dashboard Styles */
 .dashboard-title09 {
   font-size: 2rem;
   color: white;
   text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Button Group Container */
 .button-group09 {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* Stack buttons vertically on small screens */
   gap: 20px;
-  /* Space between cards */
-  flex-wrap: wrap;
-  /* Ensure buttons wrap on smaller screens */
+  position: relative;
+  z-index: 1;
+  align-items: center;
 }
 
-/* Action Button Styles */
 .action-button09 {
   background-color: white;
   color: #333;
   border: none;
-  padding: 20px;
-  width: 450px;
-  /* Width of the card */
-  height: 150px;
-  /* Height of the card */
+  padding: 15px;
+  width: 100%;
+  max-width: 450px;
+  min-height: 120px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   transition: background-color 0.3s, transform 0.3s;
+  word-wrap: break-word;
 }
 
 .action-button09:hover {
@@ -79,22 +74,236 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .action-button09 {
-    width: 200px;
-    /* Adjust width on medium screens */
-    height: 120px;
-    /* Adjust height on medium screens */
+    font-size: 1rem;
+    min-height: 100px;
   }
-  
 }
 
 @media (max-width: 480px) {
   .action-button09 {
-    width: 150px;
-    /* Adjust width on small screens */
-    height: 100px;
-    /* Adjust height on small screens */
-    font-size: 1rem;
+    font-size: 0.9rem;
+    min-height: 80px;
+    padding: 10px;
+  }
+}
+
+
+
+/* the routes */
+
+.card5 {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.file-complaint-title5 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.complaint-form5 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group5 {
+  display: flex;
+  flex-direction: column;
+}
+
+.label5 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-control5 {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form-control5 select,
+.form-control5 textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.submit-button5 {
+  padding: 12px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button5:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+.message {
+  color: green;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .card5 {
+    padding: 15px;
   }
 
-  
+  .form-control5 {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .submit-button5 {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+
+/* previous comlaints */
+.container6 {
+  padding: 10px;
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.complaints-title6 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.search-bar6 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.input6 {
+  padding: 10px;
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.buton6 {
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-width: 120px;
+}
+
+.buton6:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+.complaints-table6 {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  margin: 0 auto;
+}
+
+.thead6 th {
+  background-color: #f2f2f2;
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.tbody6 td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.complaint-image6 img {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
+  border-radius: 5px;
+}
+
+.pagination6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-button6 {
+  padding: 10px 15px;
+  margin: 0 5px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination-button6:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+.pagination-info6 {
+  font-size: 14px;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+
+  .buton6,
+  .pagination-button6 {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .thead6 th,
+  .tbody6 td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .input6 {
+    font-size: 14px;
+  }
 }
