@@ -4,10 +4,12 @@
   background-color: #333;
   color: white;
   padding: 8px 10px;
-  box-shadow: 0px 4px 2px -2px gray;
+  /* box-shadow: 0px 4px 2px -2px gray; */
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-radius: 3vh;
+  height: 10vh;
 }
 
 .logo-container {
@@ -29,14 +31,17 @@
 }
 
 .title-left {
+  color: #fff;
   margin: 0;
   font-size: 2rem;
   cursor: pointer;
+  color: #fff;
 }
 
 /* Centered layout for landing and login pages */
 .titlebar.centered {
   justify-content: center;
+  color: #fff;
 }
 
 /* Dashboard layout */

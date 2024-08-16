@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-// import '../styles/FinanceDashboard.css';
+import '../styles/FinanceDashboard.css';
 
 function FinanceDashboard() {
   const [complaints, setComplaints] = useState([]);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-// import '../styles/CEODashboard.css';
+import '../styles/CEODashboard.css';
 
 // CEODashboard Component
 function CEODashboard() {
@@ -60,12 +60,15 @@ function ViewCGMAffiliates() {
         <tbody>
           {affiliates.length === 0 ? (
             <tr>
-              <td colSpan="3" className="empty-message">No affiliates found</td>
+              <td colSpan="3" className="empty-message">
+                No affiliates found
+              </td>
             </tr>
           ) : (
             affiliates.map((affiliate, index) => (
               <tr key={index}>
-                <td>{(page - 1) * 10 + index + 1}</td> {/* Calculate the row number */}
+                <td>{(page - 1) * 10 + index + 1}</td>{" "}
+                {/* Calculate the row number */}
                 <td>{affiliate.username}</td>
                 <td>{affiliate.role}</td>
               </tr>
@@ -74,13 +77,21 @@ function ViewCGMAffiliates() {
         </tbody>
       </table>
       <div className="pagination-controls">
-        <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+        <button
+          className="action-button"
+          onClick={() => handlePageChange(page - 1)}
+          disabled={page === 1}
+        >
           Previous
         </button>
         <span>
           Page {page} of {totalPages}
         </span>
-        <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+        <button
+          className="action-button"
+          onClick={() => handlePageChange(page + 1)}
+          disabled={page === totalPages}
+        >
           Next
         </button>
       </div>
@@ -129,10 +140,31 @@ function ViewComplaints() {
     <div className="container">
       <h1 className="title">Assets Repaired/Replaced</h1>
       <div className="sort-controls">
-        <button onClick={() => handleSortChange('Allocated')}>Sort by Allocated</button>
-        <button onClick={() => handleSortChange('Insufficient Funds')}>Sort by Insufficient Funds</button>
-        <button onClick={() => handleSortChange('Pending')}>Sort by Pending</button>
-        <button onClick={() => handleSortChange(null)}>Clear Sort</button> {/* Button to clear sorting */}
+        <button
+          className="action-button"
+          onClick={() => handleSortChange("Allocated")}
+        >
+          Sort by Allocated
+        </button>
+        <button
+          className="action-button"
+          onClick={() => handleSortChange("Insufficient Funds")}
+        >
+          Sort by Insufficient Funds
+        </button>
+        <button
+          className="action-button"
+          onClick={() => handleSortChange("Pending")}
+        >
+          Sort by Pending
+        </button>
+        <button
+          className="action-button"
+          onClick={() => handleSortChange(null)}
+        >
+          Clear Sort
+        </button>{" "}
+        {/* Button to clear sorting */}
       </div>
       <table className="complaints-table">
         <thead>
@@ -155,9 +187,13 @@ function ViewComplaints() {
               <td>{complaint.amount_allocated || 0}</td>
               <td>
                 {complaint.image_url ? (
-                  <img src={complaint.image_url} alt={`Complaint ${complaint.complaint_number}`} style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                  <img
+                    src={complaint.image_url}
+                    alt={`Complaint ${complaint.complaint_number}`}
+                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                  />
                 ) : (
-                  'No Image'
+                  "No Image"
                 )}
               </td>
             </tr>
@@ -165,13 +201,21 @@ function ViewComplaints() {
         </tbody>
       </table>
       <div className="pagination-controls">
-        <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+        <button
+          className="action-button"
+          onClick={() => handlePageChange(page - 1)}
+          disabled={page === 1}
+        >
           Previous
         </button>
         <span>
           Page {page} of {totalPages}
         </span>
-        <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+        <button
+          className="action-button"
+          onClick={() => handlePageChange(page + 1)}
+          disabled={page === totalPages}
+        >
           Next
         </button>
       </div>
@@ -252,7 +296,7 @@ function EnrollmentPage() {
             placeholder="Enter email to send set-password link..."
           />
         </div>
-        <button type="submit" className="submit-button">Create User</button>
+        <button className="action-button" type="submit" >Create User</button>
         {message && <p className="message">{message}</p>}
       </form>
     </div>
