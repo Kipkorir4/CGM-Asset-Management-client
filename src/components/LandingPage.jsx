@@ -47,7 +47,7 @@ function LandingPage() {
   const renderToast = (message) => {
     toast.success(greetingMessage, {
       id: "toast-0", // Unique toast key
-      title: "Welcome to CEODashboard!",
+      title: "Welcome to CGM Properties!",
       description: "Please select your role to proceed.",
       duration: 5000,
       style: {
