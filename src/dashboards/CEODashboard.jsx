@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-// import '../styles/CEODashboard.css';
+import '../styles/CEODashboard.css';
 
 // CEODashboard Component
 function CEODashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="container">
-      <h1 className="dashboard-title">CEO Dashboard</h1>
-      <div className="button-group">
-        <button className="action-button" onClick={() => navigate('/ceo-dashboard/view-cgm-affiliates')}>View CGM Affiliates</button>
-        <button className="action-button" onClick={() => navigate('/ceo-dashboard/view-complaints')}>View Assets Repaired/Replaced (or to be)</button>
-        <button className="action-button" onClick={() => navigate('/ceo-dashboard/enrollment-page')}>Enroll a User</button>
+    <div className="container444">
+      <h1 className="dashboard-title44">CEO Dashboard</h1>
+      <div className="button-group444">
+        <button className="action-button444" onClick={() => navigate('/ceo-dashboard/view-cgm-affiliates')}>View CGM Affiliates</button>
+        <button className="action-button444" onClick={() => navigate('/ceo-dashboard/view-complaints')}>View Assets Info</button>
+        <button className="action-button444" onClick={() => navigate('/ceo-dashboard/enrollment-page')}>Enroll a User</button>
       </div>
     </div>
   );
@@ -23,6 +23,7 @@ function ViewCGMAffiliates() {
   const [affiliates, setAffiliates] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(''); // State for search query
   const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -46,48 +47,77 @@ function ViewCGMAffiliates() {
     }
   };
 
+  function capitalizeName(name) {
+    return name
+      .split(' ')
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+      .join(' ');
+  }
+
+  function formatRole(role) {
+    if (role === 'CEO') {
+      return role.toUpperCase();
+    }
+    return role
+      .replace(/-/g, ' ') // Replace hyphens with spaces
+      .split(' ')
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+      .join(' ');
+  }
+
+  // Filter affiliates based on search query
+  const filteredAffiliates = affiliates.filter(affiliate =>
+    affiliate.username.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="container1">
-      <h1 className="title1">View CGM Affiliates</h1>
-      <table className="table1">
-        <thead>
-          <tr>
+    <div className="container41">
+      <h1 className="title41">CGM Affiliates/Users</h1>
+      <input
+        type="text"
+        placeholder="Search user by username..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="search-bar41" // Add this class for styling if needed
+      />
+      <table className="table41">
+        <thead className='thead41'>
+          <tr className='tr41'>
             <th>#</th>
             <th>Username</th>
             <th>Role</th>
           </tr>
         </thead>
-        <tbody>
-          {affiliates.length === 0 ? (
-            <tr>
-              <td colSpan="3" className="empty-message">No affiliates found</td>
+        <tbody className='tbody41'>
+          {filteredAffiliates.length === 0 ? (
+            <tr className='tr41'>
+              <td colSpan="3" className="empty-message41">No affiliates found</td>
             </tr>
           ) : (
-            affiliates.map((affiliate, index) => (
-              <tr key={index}>
+            filteredAffiliates.map((affiliate, index) => (
+              <tr key={index} className='tr41'>
                 <td>{(page - 1) * 10 + index + 1}</td> {/* Calculate the row number */}
-                <td>{affiliate.username}</td>
-                <td>{affiliate.role}</td>
+                <td>{capitalizeName(affiliate.username)}</td>
+                <td>{formatRole(affiliate.role)}</td>
               </tr>
             ))
           )}
         </tbody>
       </table>
-      <div className="pagination-controls">
-        <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+      <div className="pagination-controls41">
+        <button className='button44' onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
           Previous
         </button>
         <span>
           Page {page} of {totalPages}
         </span>
-        <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+        <button className='button44' onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
           Next
         </button>
       </div>
     </div>
   );
 }
-
 
 
 // ViewComplaints Component
@@ -126,17 +156,17 @@ function ViewComplaints() {
   };
 
   return (
-    <div className="container">
-      <h1 className="title">Assets Repaired/Replaced</h1>
-      <div className="sort-controls">
-        <button onClick={() => handleSortChange('Allocated')}>Sort by Allocated</button>
-        <button onClick={() => handleSortChange('Insufficient Funds')}>Sort by Insufficient Funds</button>
-        <button onClick={() => handleSortChange('Pending')}>Sort by Pending</button>
-        <button onClick={() => handleSortChange(null)}>Clear Sort</button> {/* Button to clear sorting */}
+    <div className="container44">
+      <h1 className="title44">Assets Issues/Complaints Information</h1>
+      <div className="sort-controls44">
+        <button className='sortbuttons44' onClick={() => handleSortChange('Allocated')}>Sort by Allocated</button>
+        <button className='sortbuttons44' onClick={() => handleSortChange('Unallocated')}>Sort by Unallocated</button>
+        <button className='sortbuttons44' onClick={() => handleSortChange('Pending')}>Sort by Pending</button>
+        <button className='sortbuttons44' onClick={() => handleSortChange(null)}>Clear Sort</button>
       </div>
-      <table className="complaints-table">
-        <thead>
-          <tr>
+      <table className="complaints-table44">
+        <thead className='thead44'>
+          <tr className='tr44'>
             <th>Tenant</th>
             <th>Category</th>
             <th>Description</th>
@@ -145,9 +175,9 @@ function ViewComplaints() {
             <th>Image</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='tbody44'>
           {complaints.map((complaint) => (
-            <tr key={complaint.complaint_number}>
+            <tr className='tr44' key={complaint.complaint_number}>
               <td>{complaint.tenant}</td>
               <td>{complaint.category}</td>
               <td>{complaint.description}</td>
@@ -164,20 +194,21 @@ function ViewComplaints() {
           ))}
         </tbody>
       </table>
-      <div className="pagination-controls">
-        <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+      <div className="pagination-controls44">
+        <button className='button44' onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
           Previous
         </button>
         <span>
           Page {page} of {totalPages}
         </span>
-        <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+        <button className='button44' onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
           Next
         </button>
       </div>
     </div>
   );
 }
+
 // EnrollmentPage Component
 function EnrollmentPage() {
   const [role, setRole] = useState('');
@@ -210,14 +241,14 @@ function EnrollmentPage() {
   };
 
   return (
-    <div className="container">
-      <h1 className="title">Enrollment Form</h1>
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="form-group">
+    <div className="container42">
+      <form className="form42" onSubmit={handleSubmit}>
+        <h1 className="title42">Enrollment Form</h1>
+        <div className="form-group42">
           <label htmlFor="role">User Type</label>
           <select
-            id="role"
-            className="form-control"
+            id="role42"
+            className="form-control42"
             value={role}
             onChange={(e) => setRole(e.target.value)}
             required
@@ -228,36 +259,37 @@ function EnrollmentPage() {
             <option value="finance-manager">Finance Manager</option>
           </select>
         </div>
-        <div className="form-group">
+        <div className="form-group42">
           <label htmlFor="username">Username</label>
           <input
             type="text"
-            id="username"
-            className="form-control"
+            id="username42"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
             placeholder="Enter username for the new user..."
           />
         </div>
-        <div className="form-group">
+        <div className="form-group42">
           <label htmlFor="email">Email</label>
           <input
             type="email"
-            id="email"
-            className="form-control"
+            id="email42"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             placeholder="Enter email to send set-password link..."
           />
         </div>
-        <button type="submit" className="submit-button">Create User</button>
-        {message && <p className="message">{message}</p>}
+        <div className="submit-button-container">
+          <button type="submit" className="submit-button42">Enroll User</button>
+        </div>
+        {message && <p className="message42">{message}</p>}
       </form>
     </div>
   );
 }
+
 // CEODashboardRoutes Component
 function CEODashboardRoutes() {
   return (

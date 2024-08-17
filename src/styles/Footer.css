@@ -13,14 +13,12 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    /* Reduced gap for smaller screens */
 }
 
 @media (min-width: 600px) {
     .socials-container {
         flex-direction: row;
         gap: 20px;
-        /* Adjust for larger screens */
     }
 }
 
@@ -34,7 +32,6 @@
     .socials-title {
         margin-right: 20px;
         margin-bottom: 0;
-        /* Adjust title position for larger screens */
     }
 }
 
@@ -43,12 +40,12 @@
     padding: 0;
     display: flex;
     gap: 10px;
+    justify-content: center;
 }
 
 @media (min-width: 600px) {
     .footer .wrapper {
         gap: 20px;
-        /* Increase space between icons on larger screens */
     }
 }
 
@@ -76,6 +73,7 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
+    white-space: nowrap;
 }
 
 .footer .icon:hover .tooltip {
@@ -88,12 +86,11 @@
     font-size: 14px;
     color: #ccc;
     padding: 10px 20px;
-    /* Ensure text is properly contained */
     box-sizing: border-box;
 }
 
 .copyright a {
-    color: #007bff;
+    color: white;
     text-decoration: none;
 }
 
@@ -104,6 +101,5 @@
 @media (max-width: 599px) {
     .copyright {
         font-size: 12px;
-        /* Adjust font size for smaller screens */
     }
 }

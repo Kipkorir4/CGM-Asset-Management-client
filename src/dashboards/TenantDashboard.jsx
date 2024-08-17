@@ -11,13 +11,13 @@ function TenantDashboard() {
     <div className="container09">
       <h1 className="dashboard-title09">Tenant Dashboard</h1>
       <div className="button-group09">
-        <button className="action-button09" onClick={() => navigate('/tenant-dashboard/previous-complaints')}>
-          <FaHistory style={{ marginRight: '10px' }} /> {/* History Icon */}
-          Previous Complaints/Issues
-        </button>
         <button className="action-button09" onClick={() => navigate('/tenant-dashboard/file-complaint')}>
           <FaFlag style={{ marginRight: '10px' }} /> {/* Flag Icon */}
           Report an Issue/Complaint
+        </button>
+        <button className="action-button09" onClick={() => navigate('/tenant-dashboard/previous-complaints')}>
+          <FaHistory style={{ marginRight: '10px' }} /> {/* History Icon */}
+          Previous Complaints/Issues
         </button>
       </div>
     </div>
@@ -96,7 +96,7 @@ function PreviousComplaints() {
         />
       </div>
       <div className="filter-buttons">
-        <p>Sort complaints by Status:</p>
+        <p className="sortmsg">Sort complaints by Status:</p>
         <button className="buton6" onClick={() => setStatusFilter('')}>All</button>
         <button className="buton6" onClick={() => setStatusFilter('Pending')}>Pending</button>
         <button className="buton6" onClick={() => setStatusFilter('Accepted')}>Accepted</button>

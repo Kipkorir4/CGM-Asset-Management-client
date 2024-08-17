@@ -161,6 +161,10 @@
   font-size: 14px;
 }
 
+#description{
+  height: 4rem;
+}
+
 @media (max-width: 768px) {
   .card5 {
     padding: 15px;
@@ -190,7 +194,7 @@
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  color: #333;
+  color: white;
 }
 
 .search-bar6 {
@@ -233,12 +237,17 @@
   background-color: #333;
   transform: translateY(-2px);
 }
+.sortmsg{
+  color: white;
+  font-size: 1.1rem;
+}
 
 .complaints-table6 {
   width: 100%;
   border-collapse: collapse;
   min-width: 600px;
   margin: 0 auto;
+  background-color: white;  
 }
 
 .thead6 th {
@@ -246,12 +255,14 @@
   padding: 12px;
   border: 1px solid #ddd;
   text-align: left;
+  color: black;
 }
 
 .tbody6 td {
   padding: 12px;
   border: 1px solid #ddd;
   text-align: left;
+  color: black;
 }
 
 .complaint-image6 img {
@@ -269,7 +280,8 @@
 }
 
 .pagination-button6 {
-  padding: 10px 15px;
+  padding: 15px 25px;  
+  font-size: 1.1rem;
   margin: 0 5px;
   background-color: #000;
   color: #fff;
@@ -285,8 +297,9 @@
 }
 
 .pagination-info6 {
-  font-size: 14px;
-  color: #333;
+  font-size: 20px;
+  color: white;
+  margin: auto;
 }
 
 @media (max-width: 768px) {

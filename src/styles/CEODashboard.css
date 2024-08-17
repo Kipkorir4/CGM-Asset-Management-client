@@ -1,164 +1,462 @@
-/* General styles */
-.container {
-    width: 80%;
+/* main dash */
+/* Container */
+.container444 {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+    text-align: center;
+    background: url('../assets/pexels-jovydas-2462015.jpg') no-repeat center center fixed;
+    /* Background image */
+    background-size: cover;
+    /* Cover the entire container */
+    position: relative;
 }
 
-h1 {
-    font-size: 2rem;
+.container444::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Dark overlay */
+    z-index: 1;
+}
+
+.container444>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* Title */
+.dashboard-title44 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+/* Button Group */
+.button-group444 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Action Buttons as Cards */
+.action-button444 {
+    background-color: white;
     color: #333;
+    border: none;
+    padding: 20px;
+    margin: 10px;
+    width: 30%;
+    height: 200px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
+.action-button444:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .action-button444 {
+        width: 45%;
+        height: 180px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .action-button444 {
+        width: 100%;
+        height: 160px;
+    }
+}
+
+
+
+/* View Complaints Page */
+/* Container */
+.container44 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+/* Title */
+.title44 {
+    text-align: center;
+    color: white;
     margin-bottom: 20px;
 }
 
-.button-group {
+/* Sort Buttons */
+.sort-controls44 {
     display: flex;
     justify-content: center;
-    gap: 10px;
     margin-bottom: 20px;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
+.sortbuttons44 {
+    background-color: black;
+    /* Black buttons */
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 0 5px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
-button:hover {
-    background-color: #0056b3;
+.sortbuttons44:hover {
+    background-color: #555;
+    /* Slightly lighter on hover */
 }
 
-table {
+/* Table */
+.complaints-table44 {
     width: 100%;
     border-collapse: collapse;
+    background-color: white;
+    /* White background for the table */
+    color: #333;
+    /* Dark text color for contrast */
+}
+
+.thead44 th {
+    padding: 15px;
+    background-color: #f0f0f0;
+    /* Slightly grayed title columns */
+    color: #333;
+    border: 1px solid #ddd;
+    /* Lines on table */
+}
+
+.tbody44 td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    /* Lines on table */
+}
+
+.tr44:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Slightly off-white for even rows */
+}
+
+.tr44:nth-child(odd) {
+    background-color: #ffffff;
+    /* White for odd rows */
+}
+
+/* Pagination Controls */
+.pagination-controls44 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 20px;
 }
 
-table th,
-table td {
+.button44 {
+    background-color: black;
+    /* Black buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button44:disabled {
+    background-color: #777;
+    cursor: not-allowed;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+    .sort-controls44 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sortbuttons44 {
+        margin-bottom: 10px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .complaints-table44 {
+        font-size: 14px;
+    }
+
+    .pagination-controls44 {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .title44 {
+        font-size: 24px;
+    }
+
+    .sortbuttons44 {
+        padding: 8px 16px;
+    }
+
+    .button44 {
+        padding: 8px 16px;
+    }
+}
+
+
+
+/* View Affiliates */
+.search-bar41 {
+    font-size: 16px;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 430px;
+}
+
+.container41 {
+    padding: 20px;
+    background-color: #333;
+    /* Dark background for the whole container */
+    color: black;
+    /* Text color for the whole container */
+}
+
+/* Title Styles */
+.title41 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: white;
+    /* Title color */
+}
+
+/* Table Styles */
+.table41 {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    /* Table background color */
+}
+
+.table41 th,
+.table41 td {
     border: 1px solid #ddd;
+    /* Light grey border for table */
     padding: 8px;
     text-align: left;
 }
 
-table th {
-    background-color: #007bff;
-    color: white;
+.table41 th {
+    background-color: #f4f4f4;
+    /* Slightly gray background for table headers */
+    color: #333;
+    /* Header text color */
 }
 
-.form-group {
+/* Table Row Styles */
+.tr41:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Zebra striping effect for table rows */
+}
+
+.tr41:nth-child(odd) {
+    background-color: #fff;
+    /* White background for odd rows */
+}
+
+.empty-message41 {
+    text-align: center;
+    padding: 10px;
+    color: #666;
+    /* Light gray color for empty message */
+}
+
+/* Pagination Controls Styles */
+.pagination-controls41 {
+    color: white;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sort-buttons41 {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.button44 {
+    background-color: black;
+    /* Button background color */
+    color: white;
+    /* Button text color */
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button44:disabled {
+    background-color: #555;
+    /* Darker background for disabled buttons */
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sort-buttons41 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button44 {
+        padding: 8px 15px;
+        /* Adjust button size for smaller screens */
+    }
+
+    .table41 th,
+    .table41 td {
+        padding: 5px;
+        /* Smaller padding for smaller screens */
+    }
+
+    .pagination-controls41 {
+        flex-direction: column;
+        /* Stack pagination controls vertically */
+    }
+}
+
+
+/* Enrollment */
+/* Container styling */
+.container42 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    /* Light background color for the entire page */
+    padding: 0 10px;
+    /* Add padding to ensure content doesn't touch the edges */
+}
+
+.title42 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form42 {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    
+}
+
+.form-group42 {
     margin-bottom: 15px;
 }
 
-.form-group label {
+.form-group42 label {
     display: block;
     margin-bottom: 5px;
+    color: black;
+    font-size: 18px;
     font-weight: bold;
 }
 
-.form-group input,
-.form-group select {
+.form-group42 input,
+.form-group42 select {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    border: 1px solid #333;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.form-group input[type="text"],
-.form-group input[type="password"] {
-    background-color: #fff;
+.form-group42 input::placeholder,
+.form-group42 select {
+    color: black;
+    /* Placeholder color */
 }
 
-.dashboard-container {
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.submit-button-container {
+    text-align: center;
+    /* Centers the button horizontally */
+    margin-top: 20px;
 }
 
-.dashboard-container h1 {
-    color: #007bff;
-}
-
-.dashboard-container .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.dashboard-container button {
-    background-color: #007bff;
-    border: none;
+.submit-button42 {
+    background-color: #333;
     color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    border-radius: 8px;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 18px;
+    display: inline-block;
 }
 
-.dashboard-container button:hover {
-    background-color: #0056b3;
+.submit-button42:hover {
+    background-color: black;
 }
 
-
-/* ViewCGMAffiliates.css */
-
-/* ViewCGMAffiliates.css */
-
-.container1 {
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.title1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: center;
+.message42 {
+    margin-top: 10px;
     color: #333;
 }
 
-.table1 {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background-color: #fff;
+/* Responsive styling */
+@media (max-width: 768px) {
+    .form42 {
+        padding: 15px;
+    }
+
+    .submit-button42 {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
 }
 
-.table1 th,
-.table1 td {
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
+@media (max-width: 480px) {
+    .container42 {
+        padding: 0 5px;
+        /* Reduce padding on very small screens */
+    }
 
-.table1 th {
-    background-color: #f4f4f4;
-}
+    .form42 {
+        padding: 10px;
+    }
 
-.table1 tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.table1 tr:hover {
-    background-color: #e0e0e0;
-}
-
-.empty-message {
-    text-align: center;
-    font-style: italic;
-    color: #888;
-    padding: 20px;
+    .submit-button42 {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
 }

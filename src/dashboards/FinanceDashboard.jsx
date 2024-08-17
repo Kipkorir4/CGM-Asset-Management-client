@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-// import '../styles/FinanceDashboard.css';
+import '../styles/FinanceDashboard.css';
 
 function FinanceDashboard() {
   const [complaints, setComplaints] = useState([]);
@@ -116,18 +116,18 @@ function FinanceDashboard() {
                 {complaints.length > 0 ? (
                   complaints.map(complaint => (
                     <tr key={complaint.id} className='tr11'>
-                      <td className='td11'>{complaint.complaintNumber}</td>
-                      <td className='td11'>{complaint.category}</td>
-                      <td className='td11'>{complaint.amountAllocated || '-'}</td>
-                      <td className='td11'>{complaint.amountAllocated ? 'Allocated' : 'Unallocated'}</td>
-                      <td className='td11'>
-                        <button onClick={() => handleDecline(complaint.id)} className='button11'>Insufficient</button>
+                      <td>{complaint.complaintNumber}</td>
+                      <td>{complaint.category}</td>
+                      <td>{complaint.amountAllocated || '-'}</td>
+                      <td>{complaint.amountAllocated ? 'Allocated' : 'Unallocated'}</td>
+                      <td>
+                        <button onClick={() => handleDecline(complaint.id)} className='button112'>Insufficient</button>
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr className='tr11'>
-                    <td colSpan="6" className='td11'>No data available</td>
+                    <td className='td11' colSpan="6">No data available</td>
                   </tr>
                 )}
               </tbody>
@@ -188,6 +188,7 @@ function AllocatedComplaints() {
   const [totalComplaints, setTotalComplaints] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [complaintsPerPage] = useState(10);
+  const [searchQuery, setSearchQuery] = useState('');
   const baseURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -217,30 +218,44 @@ function AllocatedComplaints() {
     }
   };
 
+  // Filter complaints by search query
+  const filteredComplaints = allocatedComplaints.filter(complaint =>
+    complaint.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="allocated-complaints-container11">
-      <h1>Approved Allocations</h1>
-      <div className="table-container11">
-        <table className='table11'>
-          <thead className='thead11'>
-            <tr className='tr11'>
-              <th className='th11'>Category</th>
-              <th className='th11'>Complaint Number</th>
-              <th className='th11'>Amount Allocated</th>
+    <div className="allocated-complaints-container12">
+      <h1 className='h111'>Approved Allocations</h1>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search by category"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-bar"
+        />
+      </div>
+      <div className="table-container12">
+        <table className='table12'>
+          <thead className='thead12'>
+            <tr className='tr12'>
+              <th className='th12'>Category</th>
+              <th className='th12'>Complaint Number</th>
+              <th className='th12'>Amount Allocated</th>
             </tr>
           </thead>
-          <tbody className='tbody11'>
-            {allocatedComplaints.length > 0 ? (
-              allocatedComplaints.map((complaint, index) => (
-                <tr key={index} className='tr11'>
-                  <td className='td11'>{complaint.category}</td>
-                  <td className='td11'>{complaint.complaint_number}</td>
-                  <td className='td11'>{complaint.amount_allocated}</td>
+          <tbody className='tbody12'>
+            {filteredComplaints.length > 0 ? (
+              filteredComplaints.map((complaint, index) => (
+                <tr key={index} className='tr12'>
+                  <td>{complaint.category}</td>
+                  <td>{complaint.complaint_number}</td>
+                  <td>{complaint.amount_allocated}</td>
                 </tr>
               ))
             ) : (
-              <tr className='tr11'>
-                <td colSpan="3" className='td11'>No allocated complaints available</td>
+              <tr className='tr12'>
+                <td className='td11' colSpan="3">No allocated complaints available</td>
               </tr>
             )}
           </tbody>
@@ -292,27 +307,27 @@ function CurrentBudgetBalances() {
   };
 
   return (
-    <div className="current-budget-balances-container11">
-      <h1>Current Budget Balances</h1>
-      <div className="table-container11">
-        <table className='table11'>
-          <thead className='thead11'>
-            <tr className='tr11'>
-              <th className='th11'>Category</th>
-              <th className='th11'>Balance Amount</th>
+    <div className="current-budget-balances-container13">
+      <h1 className='h112'>Current Budget Balances</h1>
+      <div className="table-container13">
+        <table className='table13'>
+          <thead className='thead13'>
+            <tr className='tr13'>
+              <th className='th13'>Category</th>
+              <th className='th13'>Balance Amount</th>
             </tr>
           </thead>
-          <tbody className='tbody11'>
+          <tbody className='tbody13'>
             {balances.length > 0 ? (
               balances.map((balance, index) => (
-                <tr key={index} className='tr11'>
-                  <td className='td11'>{balance.category}</td>
-                  <td className='td11'>{balance.balance_amount}</td>
+                <tr key={index} className='tr13'>
+                  <td>{balance.category}</td>
+                  <td>{balance.balance_amount}</td>
                 </tr>
               ))
             ) : (
-              <tr className='tr11'>
-                <td colSpan="2" className='td11'>No budget balances available</td>
+              <tr className='tr13'>
+                <td className='td11' colSpan="2">No budget balances available</td>
               </tr>
             )}
           </tbody>

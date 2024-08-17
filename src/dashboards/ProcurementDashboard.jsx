@@ -146,7 +146,7 @@ function ProcurementDashboard() {
       </div>
       <div className="pagination-controls">
         <button
-          className="pagination-button6"
+          className="pagination-button65"
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
@@ -154,7 +154,7 @@ function ProcurementDashboard() {
         </button>
         <span>Page {currentPage} of {totalPages}</span>
         <button
-          className="pagination-button6"
+          className="pagination-button65"
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
         >

@@ -53,10 +53,10 @@ function Footer() {
       </div>
 
       <div className="copyright">
-        <a href="https://docs.google.com/document/d/1Rb0uDxYiuXkePJMGO72mE-a149CTbfhDuzGF1AkUQWU/edit">Terms of Service</a> |
+        <a href="https://docs.google.com/document/d/1Rb0uDxYiuXkePJMGO72mE-a149CTbfhDuzGF1AkUQWU/pub">Terms of Service</a> |
         <span>
-          <a href="https://example.com/privacy-policy">Privacy Policy</a> |
-          <a href="https://example.com/accessibility-statement">Accessibility Statement</a>
+          <a href="https://docs.google.com/document/d/1fcYf3xLxfCzhfyq0owU9vYnS8OtSUM0W7h--KPzBE7s/pub">Privacy Policy</a> |
+          <a href="https://docs.google.com/document/d/1CDKNCvjIL0rLZqRHki-RpEQaJMOBx8XbbwVgNvs6dd8/pub">Accessibility Statement </a>
         </span>
         <span>
           © {currentYear} CGM Properties. All rights reserved.

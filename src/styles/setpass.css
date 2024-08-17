@@ -8,7 +8,6 @@
     justify-content: center;
     height: 100vh;
     padding: 20px;
-    /* Add padding for smaller screens */
     box-sizing: border-box;
 }
 
@@ -44,9 +43,6 @@
 .password-input-container {
     position: relative;
 }
-#new-password{
-    width: 80%;
-}
 
 .form-control2 {
     width: 100%;
@@ -57,6 +53,8 @@
     color: #333;
     font-size: 18px;
     height: 40px;
+    box-sizing: border-box;
+    /* Ensure padding and border are included in the height */
 }
 
 .password-eye-icon {
@@ -69,6 +67,7 @@
     font-size: 20px;
 }
 
+/* Adjustments for form submit button */
 .submit-button2 {
     width: 100%;
     padding: 10px;
@@ -76,11 +75,15 @@
     border-radius: 4px;
     background-color: black;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
+    /* Match font size with input fields */
     cursor: pointer;
     transition: background-color 0.3s;
+    height: 40px;
+    /* Match height with input fields */
+    box-sizing: border-box;
+    /* Ensure padding and border are included in the height */
     font-weight: bolder;
-    font-size: 22px;
 }
 
 .submit-button2:hover {
@@ -106,24 +109,20 @@
     .form2 {
         padding: 20px;
         max-width: 90%;
-        /* Adjust width for smaller screens */
     }
 
     .title2 {
         font-size: 1.5rem;
-        /* Adjust heading size for smaller screens */
     }
 
     .form-control2 {
         padding: 8px;
         font-size: 14px;
-        /* Adjust input font size for smaller screens */
     }
 
     .submit-button2 {
         padding: 8px;
         font-size: 14px;
-        /* Adjust button font size for smaller screens */
     }
 }
 
@@ -131,23 +130,19 @@
     .form2 {
         padding: 15px;
         max-width: 100%;
-        /* Ensure form fits within very small screens */
     }
 
     .title2 {
         font-size: 1.2rem;
-        /* Further adjust heading size for very small screens */
     }
 
     .form-control2 {
         padding: 6px;
         font-size: 12px;
-        /* Further adjust input font size for very small screens */
     }
 
     .submit-button2 {
         padding: 6px;
         font-size: 12px;
-        /* Further adjust button font size for very small screens */
     }
 }
