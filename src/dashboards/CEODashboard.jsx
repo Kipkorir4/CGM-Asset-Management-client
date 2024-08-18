@@ -185,7 +185,9 @@ function ViewComplaints() {
               <td>{complaint.amount_allocated || 0}</td>
               <td>
                 {complaint.image_url ? (
-                  <img src={complaint.image_url} alt={`Complaint ${complaint.complaint_number}`} style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                  <a href={complaint.image_url} target="_blank" rel="noopener noreferrer">
+                    <img src={complaint.image_url} alt={`Complaint ${complaint.complaint_number}`} style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                  </a>
                 ) : (
                   'No Image'
                 )}

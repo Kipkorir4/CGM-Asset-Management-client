@@ -113,11 +113,13 @@ function ProcurementDashboard() {
                   <td>{complaint.date}</td>
                   <td className="complaint-image">
                     {complaint.image_url ? (
-                      <img
-                        src={complaint.image_url}
-                        alt={`Complaint Image ${complaint.id}`}
-                        style={{ maxWidth: '150px', maxHeight: '150px' }}
-                      />
+                      <a href={complaint.image_url} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={complaint.image_url}
+                          alt={`Complaint Image ${complaint.id}`}
+                          style={{ maxWidth: '150px', maxHeight: '150px' }}
+                        />
+                      </a>
                     ) : (
                       'No Image'
                     )}
