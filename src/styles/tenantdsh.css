@@ -238,7 +238,7 @@
   transform: translateY(-2px);
 }
 .sortmsg{
-  color: white;
+  color: black;
   font-size: 1.1rem;
 }
 
@@ -298,7 +298,7 @@
 
 .pagination-info6 {
   font-size: 20px;
-  color: white;
+  color: black;
   margin: auto;
 }
 
