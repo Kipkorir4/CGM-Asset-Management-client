@@ -162,10 +162,6 @@
   /* Not-allowed cursor for disabled state */
 }
 
-.declined-button:hover {
-  background-color: #ffaab1;
-}
-
 /* Hover effects for interactive buttons */
 .accept-button:hover,
 .decline-button:hover {
