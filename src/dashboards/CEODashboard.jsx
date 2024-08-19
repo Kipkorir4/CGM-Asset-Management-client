@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { FaUsers, FaTools, FaUserPlus } from 'react-icons/fa';
 import '../styles/CEODashboard.css';
 
 // CEODashboard Component
@@ -10,9 +11,15 @@ function CEODashboard() {
     <div className="container444">
       <h1 className="dashboard-title44">CEO Dashboard</h1>
       <div className="button-group444">
-        <button className="action-button444" onClick={() => navigate('/ceo-dashboard/view-cgm-affiliates')}>View CGM Affiliates</button>
-        <button className="action-button444" onClick={() => navigate('/ceo-dashboard/view-complaints')}>View Assets Info</button>
-        <button className="action-button444" onClick={() => navigate('/ceo-dashboard/enrollment-page')}>Enroll a User</button>
+        <button className="action-button444" onClick={() => navigate('/ceo-dashboard/view-cgm-affiliates')}>
+          <FaUsers style={{ marginRight: '8px' }} /> View CGM Affiliates
+        </button>
+        <button className="action-button444" onClick={() => navigate('/ceo-dashboard/view-complaints')}>
+          <FaTools style={{ marginRight: '8px' }} /> View Assets Info
+        </button>
+        <button className="action-button444" onClick={() => navigate('/ceo-dashboard/enrollment-page')}>
+          <FaUserPlus style={{ marginRight: '8px' }} /> Enroll a User
+        </button>
       </div>
     </div>
   );
