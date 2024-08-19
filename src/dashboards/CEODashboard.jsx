@@ -22,7 +22,7 @@ function CEODashboard() {
         </button>
       </div>
     </div>
-  );
+  ); 
 }
 
 // ViewCGMAffiliates Component
