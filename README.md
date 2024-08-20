@@ -4,12 +4,6 @@
 
 CGM Properties Asset Management is a web application designed to streamline the management of property-related issues within the CGM Properties organization. The application facilitates the process of filing, reviewing, and managing complaints, with specific roles and responsibilities assigned to different users.
 
-## For TM (Bin Amin/Albert Byrone):
-CEO's username is "mainman" password is "mkubwawaCGM",
-Tenant's username is "houseman" password is "rentyaCGM",
-Financial manager's username is "pesawoman" password is "pesayaCGM",
-Procurement manager's username is "weraman" password is "nikoCGM"
-
 ## Users and Roles
 
 - **CEO**
